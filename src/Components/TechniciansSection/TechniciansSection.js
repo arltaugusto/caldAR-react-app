@@ -1,104 +1,100 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import './technicians-section.css';
 import techniciansData from '../../data/MOCK_DATA.json';
 import ListItem from '../ListItem/ListItem';
-import TransitionsModal from '../TransitionModal/TransitionModal.js'
+import TransitionsModal from '../TransitionModal/TransitionModal';
 import LabeledInput from '../LabeledInput/LabeledInput';
 import plus from '../../Assets/plus.svg';
 
-
-//FIXME use hooks instead of class Components
+// FIXME use hooks instead of class Components
 export default class TechniciansSection extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      shouldOpenModal: false,
+      boilers: '',
+      email: '',
+      name: '',
+      technicians: techniciansData,
+    };
+    this.removeFromList = this.removeFromList.bind(this);
+  }
 
-    constructor(props) {
-        super(props);
-        console.log(this.props);
-        this.state = {
-            shouldOpenModal: false,
-            boilers: '',
-            email: '',
-            name: '',
-            technicians: techniciansData
-        };
-        this.removeFromList = this.removeFromList.bind(this);
-    }
-
-    componentDidMount() {
-        this.props.setHeaderCallback('Technicians');
-    }
+  componentDidMount() {
+    this.props.setHeaderCallback('Technicians');
+  }
 
     removeFromList = (id) => {
-        const stateCopy = [...this.state.technicians];
-        this.setState({technicians: stateCopy.filter(tech => tech.id !== id)});
+      const stateCopy = [...this.state.technicians];
+      this.setState({ technicians: stateCopy.filter((tech) => tech.id !== id) });
     }
 
     handleOpen = () => {
-        this.setState({
-            ...this.state,
-            shouldOpenModal: true,
-        });
+      this.setState({
+        ...this.state,
+        shouldOpenModal: true,
+      });
     };
-    
+
     handleClose = () => {
-        this.setState({
-            ...this.state,
-            shouldOpenModal: false,
-        });
+      this.setState({
+        ...this.state,
+        shouldOpenModal: false,
+      });
     };
 
     handleSubmit = (e) => {
-        e.preventDefault();
-        const newItem = {
-            id: Math.floor(Math.random() * 10000),
-            name: this.state.name,
-            email: this.state.email,
-            boilers: this.state.boilers
-        };
-        this.setState({
-            shouldOpenModal: false,
-            boilers: '',
-            email: '',
-            name: '',
-            technicians: [...this.state.technicians, newItem],
-        })
+      e.preventDefault();
+      const newItem = {
+        id: Math.floor(Math.random() * 10000),
+        name: this.state.name,
+        email: this.state.email,
+        boilers: this.state.boilers,
+      };
+      this.setState({
+        shouldOpenModal: false,
+        boilers: '',
+        email: '',
+        name: '',
+        technicians: [...this.state.technicians, newItem],
+      });
     }
 
     onNameChange = (event) => {
-        this.setState({
-            ...this.state,
-            name: event.target.value,
-        });
+      this.setState({
+        ...this.state,
+        name: event.target.value,
+      });
     }
 
     onEmailChange = (event) => {
-        this.setState({
-            ...this.state,
-            email: event.target.value,
-        });
+      this.setState({
+        ...this.state,
+        email: event.target.value,
+      });
     }
 
     onBoilerTypeChange = (event) => {
-        this.setState({
-            ...this.state,
-            boilers: event.target.value,
-        });
+      this.setState({
+        ...this.state,
+        boilers: event.target.value,
+      });
     }
 
     handleUpdate = (newItem) => {
-        const techniciansCpy = [...this.state.technicians];
-        const updatedArray = techniciansCpy.map(value => {
-            if (value.id === newItem.id) {
-                return newItem;
-            }
-            return value;
-        });
-        this.setState({
-            technicians: updatedArray,
-        });
+      const techniciansCpy = [...this.state.technicians];
+      const updatedArray = techniciansCpy.map((value) => {
+        if (value.id === newItem.id) {
+          return newItem;
+        }
+        return value;
+      });
+      this.setState({
+        technicians: updatedArray,
+      });
     }
 
-    render = () => {
-        return (
+    render = () => (
             <div className="editing-container">
                 <div className="technicians-table-container shadow">
                     <table>
@@ -109,8 +105,7 @@ export default class TechniciansSection extends Component {
                             <th>Actions</th>
                         </tr>
                         {
-                            this.state.technicians.map(value =>
-                                <ListItem 
+                            this.state.technicians.map((value) => <ListItem
                                     key={value.id}
                                     removeFromListCallback={this.removeFromList}
                                     technician={value}
@@ -137,6 +132,5 @@ export default class TechniciansSection extends Component {
                     </div>
                 </div>
             </div>
-        );
-    }
+    )
 }

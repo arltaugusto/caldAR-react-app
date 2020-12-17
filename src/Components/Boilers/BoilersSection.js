@@ -1,8 +1,5 @@
 import React from 'react';
 
-
-const BoilersSection = () => {
-    return <h1>TO DO</h1>
-};
+const BoilersSection = () => <h1>TO DO</h1>;
 
 export default BoilersSection;

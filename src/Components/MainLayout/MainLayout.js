@@ -4,9 +4,9 @@ import Header from '../Header/Header';
 import Menu from '../Menu/Menu';
 
 const MainLayout = () => {
-    const [headerTitle, setHeaderTitle] = useState('Home');
+  const [headerTitle, setHeaderTitle] = useState('Home');
 
-    return (
+  return (
         <div className="App">
         <Menu/>
         <div className="content">
@@ -14,7 +14,7 @@ const MainLayout = () => {
           <Routes setHeaderCallback={setHeaderTitle}/>
         </div>
       </div>
-    )
-}
+  );
+};
 
 export default MainLayout;
