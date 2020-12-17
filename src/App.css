@@ -1,0 +1,17 @@
+body, html {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  height: 100%;
+}
+
+.content {
+  width: 85%;
+}

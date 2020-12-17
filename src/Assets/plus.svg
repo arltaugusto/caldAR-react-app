@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="92" height="92" viewBox="0 0 92 92">
+  <defs>
+    <filter id="Elipse_15" x="0" y="0" width="92" height="92" filterUnits="userSpaceOnUse">
+      <feOffset dy="4" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="FAB_Circular_Primary_Color_Enabled" data-name="FAB / Circular / Primary Color / Enabled" transform="translate(7.5 3.5)">
+    <g transform="matrix(1, 0, 0, 1, -7.5, -3.5)" filter="url(#Elipse_15)">
+      <circle id="Elipse_15-2" data-name="Elipse 15" cx="38.5" cy="38.5" r="38.5" transform="translate(7.5 3.5)" fill="#8325fe"/>
+    </g>
+    <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M33.111,16.04H21.649V4.757A2.528,2.528,0,0,0,19.1,2.25H16.555a2.528,2.528,0,0,0-2.547,2.507V16.04H2.547A2.528,2.528,0,0,0,0,18.547v2.507a2.528,2.528,0,0,0,2.547,2.507H14.008V34.844a2.528,2.528,0,0,0,2.547,2.507H19.1a2.528,2.528,0,0,0,2.547-2.507V23.561H33.111a2.528,2.528,0,0,0,2.547-2.507V18.547A2.528,2.528,0,0,0,33.111,16.04Z" transform="translate(20.625 18.337)" fill="#fff"/>
+  </g>
+</svg>

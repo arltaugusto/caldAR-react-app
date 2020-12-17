@@ -1,0 +1,24 @@
+.caldAr-title {
+    font-size: 28px;
+    font-weight: normal;
+    margin: 0px;
+    display: flex;
+}
+
+.menu {
+    height: 100%;
+    width: 15%;
+    color: #fff;
+}
+
+.title-section {
+    height: 8%;
+    background-color: #707070;
+    padding-left: 15px ;
+}
+
+.menu-options-section {
+    padding: 9px;
+    background-color: #232F3E;
+    height: 90%;
+}

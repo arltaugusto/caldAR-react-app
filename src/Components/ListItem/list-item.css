@@ -1,0 +1,19 @@
+.list-item-row {
+    color: #232F3E;
+    font-weight: normal;
+}
+
+.list-item-row th {
+    padding: 10px;
+}
+
+.action-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.action-cell div{
+    margin: 0px 8px
+}

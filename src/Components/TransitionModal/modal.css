@@ -1,0 +1,26 @@
+.modal-title {
+    width: 100%;
+    background-color: #232F3E;
+    color: #fff;
+    height: 15%;
+    display: flex;
+    align-items: center;
+}
+
+.modal-title h2{
+    margin-left: 15px;
+}
+
+.modal {
+    width: 30%;
+    height: 50%;
+}
+
+.container {
+    width: 75%;
+}
+
+.fix-size {
+    width: 92px;
+    height: 92px;
+}

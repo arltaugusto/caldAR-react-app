@@ -1,0 +1,11 @@
+.menuItem {
+    display: flex;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.menuItemLabel {
+    margin: 0px 5px;
+    text-decoration: none;
+    color: #fff;
+}
