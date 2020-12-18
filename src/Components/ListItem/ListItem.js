@@ -3,7 +3,7 @@ import './list-item.css';
 import deleteIcon from '../../Assets/delete.svg';
 import editIcon from '../../Assets/edit.svg';
 import TransitionModal from '../TransitionModal/TransitionModal';
-import LabeledInput from '../LabeledInput/LabeledInput';
+import LabeledInput from '../TransitionModal/LabeledInput/LabeledInput';
 
 // FIXME use hooks instead of class components
 export default class ListItem extends Component {
