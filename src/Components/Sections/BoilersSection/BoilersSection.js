@@ -5,7 +5,7 @@ const BoilersSection = (props) => {
     props.setHeaderTitle('Boilers');
   });
   return (
-        <h2>TO DO BOILERS</h2>
+        <h1>TODO BOLIERS</h1>
   );
 };
 
