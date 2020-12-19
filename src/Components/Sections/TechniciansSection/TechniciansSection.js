@@ -7,7 +7,16 @@ const TechniciansSection = (props) => {
     props.setHeaderTitle('Technicians');
   });
   return (
-    <h2>TO DO TECHNICIANS</h2>
+   <div className='technicians-table-container'>
+    <table >
+      <tr className='table-titles'>
+        <th >Name</th>
+        <th >Email</th>
+        <th >Boiler Knowledge</th>
+        <th >Actions</th>
+      </tr>
+    </table>
+   </div>
   );
 };
 
