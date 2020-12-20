@@ -1,0 +1,23 @@
+.tableTitles th {
+    width: 25%;
+    color: #8325FE;
+    font-size: 27px;
+    font-weight: normal;
+}
+
+.tableCell th, td {
+    border-bottom: 1px solid #707070;
+}
+
+.tableStyle {
+    border-spacing: 0;
+    width: 100%;
+    
+}
+
+.handleOverflow {
+    max-width: 75%;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
