@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
 // FIXME use arrow function
 export default function TransitionsModal(props) {
   const classes = useStyles();
-
   return (
         <Modal
           aria-labelledby="transition-modal-title"

@@ -3,20 +3,22 @@
     color: #8325FE;
     font-size: 27px;
     font-weight: normal;
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.9);
 }
+    
 
-.tableCell th {
+.tableCell td {
     border-bottom: 1px solid #707070;
 }
 
 .tableStyle {
     border-spacing: 0;
     width: 100%;
-    
 }
 
 .handleOverflow {
-    width: 70%;
-    max-height: 400px;
+    max-height: 350px;
     overflow: auto;
 }
