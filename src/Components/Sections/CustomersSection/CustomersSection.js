@@ -36,6 +36,7 @@ const CustomersSection = (props) => {
     }
   };
 
+  // Passing an array with customers and query, returns a filtered array by value
   const getFilteredData = (initialData, value) => {
     const valueLC = value.toString().toLowerCase();
     return initialData.filter(
@@ -48,6 +49,7 @@ const CustomersSection = (props) => {
     const customerDataCopy = [...customersData];
     const updatedData = customerDataCopy.filter((customer) => customer.id !== id);
     setCustomersData(updatedData);
+    // This update is needed in case the user wants to delete in a search
     setCustomSearchData(getFilteredData(updatedData, addCustomerForm.query));
   };
 
@@ -59,6 +61,7 @@ const CustomersSection = (props) => {
       }
       return value;
     });
+    // This update is needed in case the user wants to edit in a search
     setCustomSearchData(getFilteredData(updatedArray, addCustomerForm.query));
     setCustomersData(updatedArray);
   };
@@ -138,7 +141,7 @@ submitHanlder: function on submit
 
   return (
     <div className={customerSectionStyles.contentContainer}>
-          {isLoading
+          {isLoading // This is just the spinner during the data fetch
             ? <div className={customerSectionStyles.content}>
               <CircularProgress />
             </div>
