@@ -36,9 +36,19 @@ const CustomersSection = (props) => {
     }
   };
 
+  const getFilteredData = (initialData, value) => {
+    const valueLC = value.toString().toLowerCase();
+    return initialData.filter(
+      (item) => Object.keys(item)
+        .some((key) => item[key].toString().toLowerCase().includes(valueLC)),
+    );
+  };
+
   const removeFromList = (id) => {
     const customerDataCopy = [...customersData];
-    setCustomersData(customerDataCopy.filter((customer) => customer.id !== id));
+    const updatedData = customerDataCopy.filter((customer) => customer.id !== id);
+    setCustomersData(updatedData);
+    setCustomSearchData(getFilteredData(updatedData, addCustomerForm.query));
   };
 
   const handleUpdate = (newItem) => {
@@ -49,6 +59,7 @@ const CustomersSection = (props) => {
       }
       return value;
     });
+    setCustomSearchData(getFilteredData(updatedArray, addCustomerForm.query));
     setCustomersData(updatedArray);
   };
 
@@ -66,11 +77,13 @@ const CustomersSection = (props) => {
   };
 
   const handleSearchInput = (event) => {
-    const query = event.target.value.toLowerCase();
+    const query = event.target.value;
     const customerDataCopy = [...customersData];
-    const filteredData = customerDataCopy.filter(
-      (item) => Object.keys(item).some((key) => item[key].toString().toLowerCase().includes(query)),
-    );
+    const filteredData = getFilteredData(customerDataCopy, query);
+    setAddCustomerForm({
+      ...addCustomerForm,
+      query,
+    });
     setCustomSearchData(filteredData);
   };
 
@@ -86,6 +99,7 @@ const CustomersSection = (props) => {
     const customerDataCopy = [...customersData];
     customerDataCopy.push(newItem);
     setCustomersData(customerDataCopy);
+    setCustomSearchData(getFilteredData(customerDataCopy, addCustomerForm.query));
     setAddCustomerForm({
       query: '',
       email: '',
