@@ -29,26 +29,12 @@ export class AddBuilding extends Component {
       );
     }
 
-    // Add Building
-    addBuilding = ({
-      adress, name, phone, idCustomer, boilers,
-    }) => {
-      const newBuilding = {
-        id: 105,
-        adress,
-        name,
-        phone,
-        idCustomer,
-        boilers,
-      };
-      this.setState({ building: [...this.state.building, newBuilding] });
-    }
-
     onChange = (e) => {
       this.setState({ [e.target.name]: e.target.value });
     }
 
     onSubmit = (e) => {
+      console.log('asd');
       e.preventDefault();
       this.props.addBuilding(this.state);
       this.setState(
@@ -72,7 +58,7 @@ export class AddBuilding extends Component {
           <input type='number' name='phone' placeholder='Phone' value={this.state.phone} onChange={this.onChange}/>
           <input type='number' name='idCustomer' placeholder='idCustomer' value={this.state.idCustomer} onChange={this.onChange}/>
           <input type='number' name='boilers' placeholder='Boilers' value={this.state.boilers} onChange={this.onChange}/>
-          <input type='submit' onClick={this.props.AddBuilding} value='Send' />
+          <input type='submit' value='Send' />
         </form>
       );
     }
