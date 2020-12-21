@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export class AddBuilding extends Component {
     state = {
       id: '',
-      adress: '',
+      address: '',
       name: '',
       phone: '',
       idCustomer: '',
@@ -20,7 +20,7 @@ export class AddBuilding extends Component {
       this.setState(
         {
           id: '',
-          adress: '',
+          address: '',
           name: '',
           phone: '',
           idCustomer: '',
@@ -40,7 +40,7 @@ export class AddBuilding extends Component {
       this.setState(
         {
           id: '',
-          adress: '',
+          address: '',
           name: '',
           phone: '',
           idCustomer: '',
@@ -52,13 +52,12 @@ export class AddBuilding extends Component {
     render() {
       return (
         <form onSubmit={this.onSubmit}>
-          <input type='number' name='id' placeholder='Id Number' value={this.state.id} onChange={this.onChange}/>
-          <input type='text' name='address' placeholder='Addres' value={this.state.address} onChange={this.onChange}/>
+          <input type='text' name='address' placeholder='Address' value={this.state.address} onChange={this.onChange}/>
           <input type='text' name='name' placeholder='Name' value={this.state.name} onChange={this.onChange}/>
           <input type='number' name='phone' placeholder='Phone' value={this.state.phone} onChange={this.onChange}/>
           <input type='number' name='idCustomer' placeholder='idCustomer' value={this.state.idCustomer} onChange={this.onChange}/>
           <input type='number' name='boilers' placeholder='Boilers' value={this.state.boilers} onChange={this.onChange}/>
-          <input type='submit' value='Send' />
+          <input type='submit' onClick={this.props.AddBuilding} value='Send' />
         </form>
       );
     }

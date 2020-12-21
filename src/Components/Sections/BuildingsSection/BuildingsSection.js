@@ -5,8 +5,13 @@ import AddBuilding from './AddBuilding';
 import BuildingsItem from './BuildingsItem';
 
 const BuildingsSection = (props) => {
+  useEffect(() => {
+    props.setHeaderTitle('Buildings');
+  }, []);
+
   const [buildingForm, setBuildingForm] = useState({
-    adress: '',
+    id: '',
+    address: '',
     name: '',
     phone: '',
     idCustomer: '',
@@ -15,26 +20,23 @@ const BuildingsSection = (props) => {
 
   const [allBuildings, setAllBuildings] = useState(buildings);
 
-  useEffect(() => {
-    props.setHeaderTitle('Buildings');
-  }, []);
-
   // Add Building
   const addBuilding = ({
-    adress, name, phone, idCustomer, boilers,
+    address, name, phone, idCustomer, boilers,
   }) => {
     console.log('entre');
     const newBuilding = {
       id: uuid(),
-      adress,
+      address,
       name,
       phone,
       idCustomer,
       boilers,
     };
-    setAllBuildings([...buildingForm.building, newBuilding]);
+    setAllBuildings([...allBuildings, newBuilding]);
     setBuildingForm({
-      adress: '',
+      id: '',
+      address: '',
       name: '',
       phone: '',
       idCustomer: '',
@@ -42,10 +44,11 @@ const BuildingsSection = (props) => {
     });
   };
 
+  console.log(buildingForm);
+
+  // Delete Building
   const deleteBuilding = (id) => {
     setAllBuildings([...allBuildings.filter((building) => building.id !== id)]);
-    console.log(id);
-    console.log(buildings);
   };
 
   const updateBuilding = () => {
@@ -62,7 +65,7 @@ const BuildingsSection = (props) => {
           updateBuilding={updateBuilding}
         />
       ))}
-      <AddBuilding buildings={buildings} addBuilding={addBuilding} />
+      <AddBuilding addBuilding={addBuilding} />
     </div>
   );
 };
