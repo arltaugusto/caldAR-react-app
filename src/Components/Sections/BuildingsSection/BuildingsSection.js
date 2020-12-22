@@ -24,7 +24,6 @@ const BuildingsSection = (props) => {
   const addBuilding = ({
     address, name, phone, idCustomer, boilers,
   }) => {
-    console.log('entre');
     const newBuilding = {
       id: uuid(),
       address,
@@ -44,15 +43,28 @@ const BuildingsSection = (props) => {
     });
   };
 
-  console.log(buildingForm);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    addBuilding();
+  };
+
+  const onChange = (e) => setBuildingForm({
+    ...buildingForm,
+    [e.target.name]: e.target.value,
+  });
 
   // Delete Building
   const deleteBuilding = (id) => {
     setAllBuildings([...allBuildings.filter((building) => building.id !== id)]);
   };
 
-  const updateBuilding = () => {
-    console.log('asd');
+  // Update Building
+
+  const updateBuilding = (buildingUpdate) => {
+    const buildingsCopy = [...allBuildings];
+    const updatedBuilding = buildingsCopy.map((item) => (item.id === buildingUpdate.id
+      ? buildingUpdate : item));
+    setAllBuildings(updatedBuilding);
   };
 
   return (
@@ -65,7 +77,11 @@ const BuildingsSection = (props) => {
           updateBuilding={updateBuilding}
         />
       ))}
-      <AddBuilding addBuilding={addBuilding} />
+      <AddBuilding
+      addBuilding={addBuilding}
+      onCange={onChange}
+      onSubmit={onSubmit}
+      buildingForm={buildingForm} />
     </div>
   );
 };

@@ -34,7 +34,6 @@ export class AddBuilding extends Component {
     }
 
     onSubmit = (e) => {
-      console.log('asd');
       e.preventDefault();
       this.props.addBuilding(this.state);
       this.setState(
@@ -62,12 +61,5 @@ export class AddBuilding extends Component {
       );
     }
 }
-
-/*  const formStyle = {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      flexWrap: 'wrap',
-  }; */
 
 export default AddBuilding;

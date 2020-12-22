@@ -3,19 +3,23 @@ import { FaPen, FaTrash } from 'react-icons/fa';
 import './CustomersItems.css';
 
 const BuildingsItem = (props) => {
-  // state = {...this.props.customer, isEditing: false};
-
   const [buildingsItem, setBuildingsItem] = useState({
     ...props.building,
     isEditing: false,
   });
 
   const toggleEdit = () => {
-    setBuildingsItem({ isEditing: !buildingsItem.isEditing });
+    setBuildingsItem({
+      ...buildingsItem,
+      isEditing: !buildingsItem.isEditing,
+    });
   };
 
   const onChange = (e) => {
-    setBuildingsItem({ [e.target.name]: e.target.value });
+    setBuildingsItem({
+      ...buildingsItem,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const saveChanges = () => {
@@ -29,37 +33,37 @@ const BuildingsItem = (props) => {
         <input
           type='number'
           name='id'
-          value={buildingsItem.id}
+          value={props.building.id}
           onChange={onChange}
         />
         <input
           type='text'
           name='address'
-          value={buildingsItem.address}
+          value={props.building.address}
           onChange={onChange}
         />
         <input
           type='text'
           name='name'
-          value={buildingsItem.name}
+          value={props.building.name}
           onChange={onChange}
         />
         <input
           type='number'
           name='phone'
-          value={buildingsItem.phone}
+          value={props.building.phone}
           onChange={onChange}
         />
         <input
         type='number'
           name='idCustomer'
-          value={buildingsItem.idCustomer}
+          value={props.building.idCustomer}
           onChange={onChange}
         />
         <input
           type='number'
           name='boilers'
-          value={buildingsItem.boilers}
+          value={props.building.boilers}
           onChange={onChange}
         />
         <div>
