@@ -61,11 +61,13 @@ const TechniciansSection = (props) => {
   };
   return (
    <div >
+     <div>
       <AddTechnician technicianForm={techniciansForm}
         onSubmit={onSubmit}
         onChange={onChange}
         addBoilerType={addTechnician}
       />
+      </div>
      <ul className="ulStyle">
         <li className="liStyle">Id</li>
         <li className="liStyle">First Name</li>

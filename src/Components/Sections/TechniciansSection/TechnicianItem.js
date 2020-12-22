@@ -24,12 +24,6 @@ const TechnicianItem = (props) => {
     return (
       <ul>
         <input
-          type='number'
-          name='id'
-          value={technicianItem.id}
-          onChange={onChange}
-        />
-        <input
           type='text'
           name='firstName'
           value={technicianItem.firstName}
