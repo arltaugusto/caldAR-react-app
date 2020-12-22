@@ -1,0 +1,10 @@
+[{"id":1,"first_name":"Martita","last_name":"O'Currane","email":"mocurrane0@soup.io","hour_rate":"$15.39","daily_capacity":4,"typeBoilersId":[2,3]},
+{"id":2,"first_name":"Giovanni","last_name":"Mangenot","email":"gmangenot1@census.gov","hour_rate":"$5.59","daily_capacity":4,"typeBoilersId":[4,2]},
+{"id":3,"first_name":"Terry","last_name":"Chansonne","email":"tchansonne2@dropbox.com","hour_rate":"$43.52","daily_capacity":4,"typeBoilersId":[4,1]},
+{"id":4,"first_name":"Kariotta","last_name":"Getty","email":"kgetty3@wunderground.com","hour_rate":"$10.85","daily_capacity":0,"typeBoilersId":[4]},
+{"id":5,"first_name":"Jacqui","last_name":"Boykett","email":"jboykett4@furl.net","hour_rate":"$33.96","daily_capacity":7,"typeBoilersId":[2]},
+{"id":6,"first_name":"Armstrong","last_name":"Heddon","email":"aheddon5@naver.com","hour_rate":"$40.39","daily_capacity":4,"typeBoilersId":[4]},
+{"id":7,"first_name":"Serge","last_name":"Bayfield","email":"sbayfield6@imgur.com","hour_rate":"$48.43","daily_capacity":7,"typeBoilersId":[3]},
+{"id":8,"first_name":"Fitz","last_name":"Valentelli","email":"fvalentelli7@jiathis.com","hour_rate":"$35.67","daily_capacity":1,"typeBoilersId":[1,2]},
+{"id":9,"first_name":"Zach","last_name":"Bugg","email":"zbugg8@wufoo.com","hour_rate":"$35.15","daily_capacity":4,"typeBoilersId":[2,3]},
+{"id":10,"first_name":"Igor","last_name":"Destouche","email":"idestouche9@usa.gov","hour_rate":"$48.64","daily_capacity":6,"typeBoilersId":[1]}]
