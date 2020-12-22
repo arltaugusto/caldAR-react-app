@@ -23,7 +23,6 @@ const BoilerTypeItem = (props) => {
   };
 
   const saveChanges = () => {
-    console.log(boilersTypeItem);
     toggleEdit();
     props.updateBoilersTypes(boilersTypeItem);
   };
