@@ -8,11 +8,17 @@ const TechnicianItem = (props) => {
   });
 
   const toggleEdit = () => {
-    setTechnicianItem({ isEditing: !technicianItem.isEditing });
+    setTechnicianItem({
+      ...technicianItem,
+      isEditing: !technicianItem.isEditing,
+    });
   };
 
   const onChange = (e) => {
-    setTechnicianItem({ [e.target.name]: e.target.value });
+    setTechnicianItem({
+      ...technicianItem,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const saveChanges = () => {
@@ -24,13 +30,13 @@ const TechnicianItem = (props) => {
     return (
       <ul className="ulStyle">
         <li className='liStyle'>
-          {props.technician.id}
+          {technicianItem.id}
         </li>
         <li className='liStyle'>
           <input
             type='text'
             name='firstName'
-            value={props.technician.firstName}
+            value={technicianItem.firstName}
             onChange={onChange}
           />
         </li>
@@ -38,7 +44,7 @@ const TechnicianItem = (props) => {
           <input
             type='text'
             name='lastName'
-            value={props.technician.lastName}
+            value={technicianItem.lastName}
             onChange={onChange}
           />
         </li>
@@ -46,7 +52,7 @@ const TechnicianItem = (props) => {
           <input
             type='text'
             name='email'
-            value={props.technician.email}
+            value={technicianItem.email}
             onChange={onChange}
           />
         </li>
@@ -54,7 +60,7 @@ const TechnicianItem = (props) => {
           <input
           type='text'
             name='hourRate'
-            value={props.technician.hourRate}
+            value={technicianItem.hourRate}
             onChange={onChange}
           />
         </li>
@@ -70,7 +76,7 @@ const TechnicianItem = (props) => {
           <input
             type='text'
             name='typeBoilersId'
-            value={props.technician.typeBoilersId}
+            value={technicianItem.typeBoilersId}
             onChange={onChange}
           />
         </li>

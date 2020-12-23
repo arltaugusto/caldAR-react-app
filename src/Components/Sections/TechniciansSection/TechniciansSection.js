@@ -70,7 +70,7 @@ const TechniciansSection = (props) => {
         addBoilerType={addTechnician}
       />
       </div>
-     <ul className="ulStyle">
+      <ul className="ulStyle">
         <li className="liStyle-tit">Id</li>
         <li className="liStyle-tit">First Name</li>
         <li className="liStyle-tit">Last Name</li>
@@ -79,14 +79,14 @@ const TechniciansSection = (props) => {
         <li className="liStyle-tit">Daily Capacity</li>
         <li className="liStyle-tit">Type Boilers</li>
         <li className="liStyle-tit">Actions</li>
-      </ul>
+       </ul>
        {allTechnicians.map((technician) => (
         <TechnicianItem
-        key={technician.id}
-        technician={technician}
-        deleteTechnician={deleteTechnician}
-        updateTechnician={updateTechnician}
-      />
+          key={technician.id}
+          technician={technician}
+          deleteTechnician={deleteTechnician}
+          updateTechnician={updateTechnician}
+        />
        ))}
    </div>
   );
