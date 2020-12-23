@@ -21,16 +21,14 @@ const BuildingsSection = (props) => {
   const [allBuildings, setAllBuildings] = useState(buildings);
 
   // Add Building
-  const addBuilding = ({
-    address, name, phone, idCustomer, boilers,
-  }) => {
+  const addBuilding = () => {
     const newBuilding = {
       id: uuid(),
-      address,
-      name,
-      phone,
-      idCustomer,
-      boilers,
+      address: buildingForm.address,
+      name: buildingForm.name,
+      phone: buildingForm.phone,
+      idCustomer: buildingForm.idCustomer,
+      boilers: buildingForm.boilers,
     };
     setAllBuildings([...allBuildings, newBuilding]);
     setBuildingForm({
@@ -74,7 +72,7 @@ const BuildingsSection = (props) => {
         <li className="liStyle">Address</li>
         <li className="liStyle">Name</li>
         <li className="liStyle">Phone</li>
-        <li className="liStyle">Id Boilers</li>
+        <li className="liStyle">Id Customers</li>
         <li className="liStyle">Boilers</li>
         <li className="liStyle">Actions</li>
       </ul>

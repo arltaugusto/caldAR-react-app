@@ -31,31 +31,37 @@ const BuildingsItem = (props) => {
     return (
       <ul>
         <input
+          type='number'
           name='id'
           value={buildingsItem.id}
           onChange={onChange}
         />
         <input
+          type='text'
           name='address'
           value={buildingsItem.address}
           onChange={onChange}
         />
         <input
+          type='text'
           name='name'
           value={buildingsItem.name}
           onChange={onChange}
         />
         <input
+          type='number'
           name='phone'
           value={buildingsItem.phone}
           onChange={onChange}
         />
         <input
+          type='number'
           name='idCustomer'
           value={buildingsItem.idCustomer}
           onChange={onChange}
         />
         <input
+          type='number'
           name='boilers'
           value={buildingsItem.boilers}
           onChange={onChange}
