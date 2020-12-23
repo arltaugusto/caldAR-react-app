@@ -20,17 +20,15 @@ const TechniciansSection = (props) => {
   const [allTechnicians, setAllTechnicians] = useState(technicians);
 
   // Add Technician
-  const addTechnician = ({
-    firstName, lastName, email, hourRate, dailyCapacity, typeBoilersId,
-  }) => {
+  const addTechnician = () => {
     const newTechnician = {
       id: uuid(),
-      firstName,
-      lastName,
-      email,
-      hourRate,
-      dailyCapacity,
-      typeBoilersId,
+      firstName: techniciansForm.firstName,
+      lastName: techniciansForm.lastName,
+      email: techniciansForm.email,
+      hourRate: techniciansForm.hourRate,
+      dailyCapacity: techniciansForm.dailyCapacity,
+      typeBoilersId: techniciansForm.typeBoilersId,
     };
     setAllTechnicians([...allTechnicians, newTechnician]);
     setTechniciansForm({
@@ -57,7 +55,11 @@ const TechniciansSection = (props) => {
   const deleteTechnician = (id) => {
     setAllTechnicians([...allTechnicians.filter((technician) => technician.id !== id)]);
   };
-  const updateTechnician = () => {
+  const updateTechnician = (updatedItem) => {
+    const itemCopy = [...allTechnicians];
+    const updatedTechnician = itemCopy.map((item) => (item.id === updatedItem.id
+      ? updatedItem : item));
+    setAllTechnicians(updatedTechnician);
   };
   return (
    <div >
@@ -69,23 +71,23 @@ const TechniciansSection = (props) => {
       />
       </div>
      <ul className="ulStyle">
-        <li className="liStyle">Id</li>
-        <li className="liStyle">First Name</li>
-        <li className="liStyle">Last Name</li>
-        <li className="liStyle">Email</li>
-        <li className="liStyle">Hour Rate</li>
-        <li className="liStyle">Daily Capacity</li>
-        <li className="liStyle">Type Boilers</li>
-        <li className="liStyle">Actions</li>
+        <li className="liStyle-tit">Id</li>
+        <li className="liStyle-tit">First Name</li>
+        <li className="liStyle-tit">Last Name</li>
+        <li className="liStyle-tit">Email</li>
+        <li className="liStyle-tit">Hour Rate</li>
+        <li className="liStyle-tit">Daily Capacity</li>
+        <li className="liStyle-tit">Type Boilers</li>
+        <li className="liStyle-tit">Actions</li>
       </ul>
-      {allTechnicians.map((technician) => (
+       {allTechnicians.map((technician) => (
         <TechnicianItem
         key={technician.id}
         technician={technician}
         deleteTechnician={deleteTechnician}
         updateTechnician={updateTechnician}
       />
-      ))}
+       ))}
    </div>
   );
 };

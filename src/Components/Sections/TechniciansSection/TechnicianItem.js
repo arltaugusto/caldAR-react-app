@@ -22,46 +22,61 @@ const TechnicianItem = (props) => {
 
   if (technicianItem.isEditing) {
     return (
-      <ul>
-        <input
+      <ul className="ulStyle">
+        <li className='liStyle'>
+          {props.technician.id}
+        </li>
+        <li className='liStyle'>
+          <input
+            type='text'
+            name='firstName'
+            value={props.technician.firstName}
+            onChange={onChange}
+          />
+        </li>
+        <li className='liStyle'>
+          <input
+            type='text'
+            name='lastName'
+            value={props.technician.lastName}
+            onChange={onChange}
+          />
+        </li>
+        <li className='liStyle'>
+          <input
+            type='text'
+            name='email'
+            value={props.technician.email}
+            onChange={onChange}
+          />
+        </li>
+        <li className='liStyle'>
+          <input
           type='text'
-          name='firstName'
-          value={technicianItem.firstName}
-          onChange={onChange}
-        />
-        <input
-          type='text'
-          name='lastName'
-          value={technicianItem.lastName}
-          onChange={onChange}
-        />
-        <input
-          type='text'
-          name='email'
-          value={technicianItem.email}
-          onChange={onChange}
-        />
-        <input
-        type='number'
-          name='hourRate'
-          value={technicianItem.hourRate}
-          onChange={onChange}
-        />
+            name='hourRate'
+            value={props.technician.hourRate}
+            onChange={onChange}
+          />
+        </li>
+        <li className='liStyle'>
          <input
           type='number'
           name='dailyCapacity'
-          value={technicianItem.dailyCapacity}
+          value={props.technician.dailyCapacity}
           onChange={onChange}
         />
-        <input
-          type='number'
-          name='typeBoilersId'
-          value={technicianItem.typeBoilersId}
-          onChange={onChange}
-        />
+        </li>
+        <li className='liStyle'>
+          <input
+            type='text'
+            name='typeBoilersId'
+            value={props.technician.typeBoilersId}
+            onChange={onChange}
+          />
+        </li>
         <div>
-          <button onClick={saveChanges} className="actionButtons">SAVE</button>
-          <button onClick={toggleEdit} className="actionButtons">CANCEL</button>
+          <button onClick={saveChanges} className='submit-button'>Save</button>
+          <button onClick={toggleEdit} className='submit-button'>Cancel</button>
         </div>
       </ul>
     );

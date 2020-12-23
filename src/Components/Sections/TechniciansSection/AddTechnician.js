@@ -1,47 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export class addTechnician extends Component {
-    state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      hourRate: '',
-      dailyCapacity: '',
-      typeBoilersId: '',
-    }
-
-    onChange = (e) => this.setState({
-      [e.target.name]: e.target.value,
-    });
-
-    onSubmit = (e) => {
-      e.preventDefault();
-      this.props.AddTechnician(this.state);
-      this.setState(
-        {
-          firstName: '',
-          lastName: '',
-          email: '',
-          hourRate: '',
-          dailyCapacity: '',
-          typeBoilersId: '',
-        },
-      );
-    }
-
-    render() {
-      return (
-        <form onSubmit={this.onSubmit}>
-          <input type='text' name='firstName' placeholder='First Name' value={this.state.firstName} onChange={this.onChange}/>
-          <input type='text' name='lastName' placeholder='Last Name' value={this.state.lastName} onChange={this.onChange}/>
-          <input type='text' name='email' placeholder='Email' value={this.state.email} onChange={this.onChange}/>
-          <input type='number' name='hourRate' placeholder='Hour Rate' value={this.state.hourRate} onChange={this.onChange}/>
-          <input type='number' name='dailyCapacity' placeholder='Daily Capacity' value={this.state.dailyCapacity} onChange={this.onChange}/>
-          <input type='number' name='typeBoilersId' placeholder='Type Boilers Capacity' value={this.state.typeBoilersId} onChange={this.onChange}/>
-          <input type='submit' onClick={this.props.AddTechnician} value='Send' />
+const addTechnician = (props) => (
+        <form onSubmit={props.onSubmit}>
+          <input type='text' name='firstName' placeholder='First Name' value={props.firstName} onChange={props.onChange}/>
+          <input type='text' name='lastName' placeholder='Last Name' value={props.lastName} onChange={props.onChange}/>
+          <input type='text' name='email' placeholder='Email' value={props.email} onChange={props.onChange}/>
+          <input type='text' name='hourRate' placeholder='Hour Rate' value={props.hourRate} onChange={props.onChange}/>
+          <input type='number' name='dailyCapacity' placeholder='Daily Capacity' value={props.dailyCapacity} onChange={props.onChange}/>
+          <input type='text' name='typeBoilersId' placeholder='Type Boilers' value={props.typeBoilersId} onChange={props.onChange}/>
+          <input type='submit'className='submit-button' value='Add Technician' />
         </form>
-      );
-    }
-}
+);
 
 export default addTechnician;

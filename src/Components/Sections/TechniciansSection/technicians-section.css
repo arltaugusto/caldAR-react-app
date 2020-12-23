@@ -52,12 +52,14 @@
 }
 
 .submit-button {
-    width: 327px;
-    height: 48px;
     background-color: #8325FE;
     color: #fff;
     border-radius: 3px;
-    font-size: 16px;
+    font-size: 15px;
+    border: none;
+    margin: 3px;
+    padding: 5px;
+    cursor: pointer;
 }
 
 .single-row {
@@ -73,11 +75,10 @@
 }
 .actionButtons {
     cursor: pointer;
-    color: disable;
     margin: 10px;
     color: #242e3e;
     border: none;
-    background: white
+    background: white;
 }
 
 .ulStyle{
@@ -86,10 +87,26 @@
     justify-content: space-around;
     padding-bottom: 5px;
     list-style:none;
-    border-bottom: 1px solid #e3e2e4
+    border-bottom: 1px solid #e3e2e4;
+    margin: 10px;
 }
 
 .liStyle {
     width: 16%;
     text-align: center;
+    margin: 10 px;
+    padding: 5px;
+}
+.liStyle-tit {
+    width: 16%;
+    text-align: center;
+    color: #8325FE;
+    font-weight: bold;
+    margin: 10px;
+}
+input{
+    margin: 5px;
+}
+.div-buttons{
+    display: inline;
 }
