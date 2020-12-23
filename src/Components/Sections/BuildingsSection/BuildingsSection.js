@@ -69,6 +69,15 @@ const BuildingsSection = (props) => {
 
   return (
     <div>
+      <ul className="ulStyle">
+        <li className="liStyle">Id</li>
+        <li className="liStyle">Address</li>
+        <li className="liStyle">Name</li>
+        <li className="liStyle">Phone</li>
+        <li className="liStyle">Id Boilers</li>
+        <li className="liStyle">Boilers</li>
+        <li className="liStyle">Actions</li>
+      </ul>
       {allBuildings.map((building) => (
         <BuildingsItem
           key={building.id}
@@ -79,7 +88,7 @@ const BuildingsSection = (props) => {
       ))}
       <AddBuilding
       addBuilding={addBuilding}
-      onCange={onChange}
+      onChange={onChange}
       onSubmit={onSubmit}
       buildingForm={buildingForm} />
     </div>

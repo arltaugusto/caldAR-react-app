@@ -31,39 +31,33 @@ const BuildingsItem = (props) => {
     return (
       <ul>
         <input
-          type='number'
           name='id'
-          value={props.building.id}
+          value={buildingsItem.id}
           onChange={onChange}
         />
         <input
-          type='text'
           name='address'
-          value={props.building.address}
+          value={buildingsItem.address}
           onChange={onChange}
         />
         <input
-          type='text'
           name='name'
-          value={props.building.name}
+          value={buildingsItem.name}
           onChange={onChange}
         />
         <input
-          type='number'
           name='phone'
-          value={props.building.phone}
+          value={buildingsItem.phone}
           onChange={onChange}
         />
         <input
-        type='number'
           name='idCustomer'
-          value={props.building.idCustomer}
+          value={buildingsItem.idCustomer}
           onChange={onChange}
         />
         <input
-          type='number'
           name='boilers'
-          value={props.building.boilers}
+          value={buildingsItem.boilers}
           onChange={onChange}
         />
         <div>

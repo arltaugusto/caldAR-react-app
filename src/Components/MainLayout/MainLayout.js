@@ -7,13 +7,13 @@ const MainLayout = () => {
   const [headerTitle, setHeaderTitle] = useState('Home');
 
   return (
-      <div className="App">
-        <Menu/>
-        <div className="content">
-          <Header title={headerTitle} />
-          <Routes setHeaderCallback={setHeaderTitle}/>
-        </div>
+    <div className="App">
+      <Menu/>
+      <div className="content">
+        <Header title={headerTitle} />
+        <Routes setHeaderCallback={setHeaderTitle}/>
       </div>
+    </div>
   );
 };
 
