@@ -75,10 +75,6 @@ const CustomersSection = (props) => {
     setOpenModal(true);
   };
 
-  const handleClose = () => {
-    setOpenModal(false);
-  };
-
   const handleSearchInput = (event) => {
     const query = event.target.value;
     const customerDataCopy = [...customersData];
@@ -109,7 +105,7 @@ const CustomersSection = (props) => {
       address: '',
       type: 'particular',
     });
-    handleClose();
+    setOpenModal(false);
   };
 
   const onInputChange = (event) => {
@@ -167,7 +163,7 @@ submitHanlder: function on submit
                 </div>
             </div>
           }
-          <TransitionModal handleClose={handleClose} handleOpen={handleOpen} title="Add new Customer" open={shouldOpenModal} >
+          <TransitionModal setModal={setOpenModal} handleOpen={handleOpen} title="Add new Customer" open={shouldOpenModal} >
             {getForm(addCustomerForm, onInputChange, handleSubmit)}
           </TransitionModal>
     </div>

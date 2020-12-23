@@ -21,13 +21,18 @@ const useStyles = makeStyles((theme) => ({
 // FIXME use arrow function
 export default function TransitionsModal(props) {
   const classes = useStyles();
+
+  const handleClose = () => {
+    props.setModal(false);
+  };
+
   return (
         <Modal
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"
           className={classes.modal}
           open={props.open}
-          onClose={props.handleClose}
+          onClose={handleClose}
           closeAfterTransition
           BackdropComponent={Backdrop}
           BackdropProps={{

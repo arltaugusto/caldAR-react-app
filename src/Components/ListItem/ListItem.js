@@ -27,10 +27,6 @@ const ListItem = (props) => {
     setShouldOpenModal(true);
   };
 
-  const handleClose = () => {
-    setShouldOpenModal(false);
-  };
-
   const getNewItem = () => {
     const newItem = {};
     Object.entries(updateForm).forEach(([key, value]) => { newItem[key] = value; });
@@ -40,7 +36,7 @@ const ListItem = (props) => {
   const handleUpdateSubmit = (event) => {
     event.preventDefault();
     props.handleUpdate(getNewItem());
-    handleClose();
+    setShouldOpenModal(false);
   };
 
   return (<tr className="list-item-row">
@@ -53,7 +49,7 @@ const ListItem = (props) => {
               <EditIcon onClick={handleOpen}/>
           </td>
           <TransitionModal
-             handleClose={handleClose}
+             setModal={setShouldOpenModal}
              handleOpen={handleOpen}
              title={props.updateTitle}
              open={shouldOpenModal}
