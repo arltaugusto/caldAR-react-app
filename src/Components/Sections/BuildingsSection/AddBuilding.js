@@ -2,7 +2,6 @@ import React from 'react';
 
 const AddBuilding = (props) => (
   <form onSubmit={props.onSubmit}>
-    <input type='number' name='id' placeholder='ID' value={props.buildingForm.id} onChange={props.onChange}/>
     <input type='text' name='address' placeholder='Address' value={props.buildingForm.address} onChange={props.onChange} />
     <input type='text' name='name' placeholder='Name' value={props.buildingForm.name} onChange={props.onChange}/>
     <input type='number' name='phone' placeholder='Phone' value={props.buildingForm.phone} onChange={props.onChange}/>
