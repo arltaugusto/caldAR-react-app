@@ -1,105 +1,63 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './list-item.css';
-import deleteIcon from '../../Assets/delete.svg';
-import editIcon from '../../Assets/edit.svg';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import TransitionModal from '../TransitionModal/TransitionModal';
-import LabeledInput from '../TransitionModal/LabeledInput/LabeledInput';
 
-// FIXME use hooks instead of class components
-export default class ListItem extends Component {
-  constructor(props) {
-    super(props);
-    const { technician } = props;
-    this.state = {
-      shouldOpenModal: false,
-      email: technician.email,
-      name: technician.name,
-      boilers: technician.boilers,
-    };
-  }
+const ListItem = (props) => {
+  // Every module has differents keys, this function set the states according to each case.
+  const getInitialState = () => {
+    const state = { id: props.item.id };
+    Object.entries(props.item).forEach(([key, value]) => {
+      state[key] = value;
+    });
+    return state;
+  };
+  const [updateForm, setUpdateForm] = useState(getInitialState());
+  const [shouldOpenModal, setShouldOpenModal] = useState(false);
 
-    handleOpen = () => {
-      this.setState({
-        ...this.state,
-        shouldOpenModal: true,
-      });
-    };
+  const handleInputChange = (event) => {
+    setUpdateForm({
+      ...updateForm,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-    handleClose = () => {
-      this.setState({
-        email: this.props.technician.email,
-        name: this.props.technician.name,
-        boilers: this.props.technician.boilers,
-        shouldOpenModal: false,
-      });
-    };
+  const handleOpen = () => {
+    setShouldOpenModal(true);
+  };
 
-    onNameChange = (event) => {
-      this.setState({
-        ...this.state,
-        name: event.target.value,
-      });
-    }
+  const getNewItem = () => {
+    const newItem = {};
+    Object.entries(updateForm).forEach(([key, value]) => { newItem[key] = value; });
+    return newItem;
+  };
 
-    onEmailChange = (event) => {
-      this.setState({
-        ...this.state,
-        email: event.target.value,
-      });
-    }
+  const handleUpdateSubmit = (event) => {
+    event.preventDefault();
+    props.handleUpdate(getNewItem());
+    setShouldOpenModal(false);
+  };
 
-    onBoilerTypeChange = (event) => {
-      this.setState({
-        ...this.state,
-        boilers: event.target.value,
-      });
-    }
+  return (<tr className="list-item-row">
+          {Object.entries(props.item)
+            .filter(([key]) => !props.notToShowKeys.includes(key))
+            .map((entry) => <td key={entry[1] + props.item.id}>{entry[1]}</td>)
+          }
+          <td>
+              <DeleteIcon onClick={() => props.removeFromListCallback(props.item.id)}/>
+              <EditIcon onClick={handleOpen}/>
+          </td>
+          <TransitionModal
+             setModal={setShouldOpenModal}
+             handleOpen={handleOpen}
+             title={props.updateTitle}
+             open={shouldOpenModal}
+          >
+            {props.getForm(updateForm, handleInputChange, handleUpdateSubmit) }
+          </TransitionModal>
+    </tr>
+  );
+};
 
-    getNewItem = () => ({
-      id: this.props.technician.id,
-      name: this.state.name,
-      email: this.state.email,
-      boilers: this.state.boilers,
-    })
-
-    handleSubmit = (e) => {
-      e.preventDefault();
-      this.props.handleUpdate(this.getNewItem());
-      this.handleClose();
-    }
-
-    render = () => (
-            <tr className="list-item-row">
-                <th>{this.props.technician.name}</th>
-                <th>{this.props.technician.email}</th>
-                <th>{this.props.technician.boilers}</th>
-                <th className="action-cell">
-                    <div onClick={
-                      () => this.props.removeFromListCallback(this.props.technician.id)
-                    }>
-                        <img src={deleteIcon}></img>
-                    </div>
-                    <div onClick={this.handleOpen}>
-                        <img src={editIcon}></img>
-                    </div>
-                </th>
-                <TransitionModal
-                   handleOpen={this.handleOpen}
-                   handleClose={this.handleClose}
-                   title="Update technician"
-                   open={this.state.shouldOpenModal}
-                >
-                    <form className="add-tenchnician-form" onSubmit={this.handleSubmit}>
-                        <div className="row">
-                            <LabeledInput value={this.state.name} onChange={this.onNameChange} label="Name"/>
-                            <LabeledInput value={this.state.email} onChange={this.onEmailChange} label="Email"/>
-                        </div>
-                        <div className="single-row">
-                            <LabeledInput value={this.state.boilers} onChange={this.onBoilerTypeChange} label="Boiler Knowledge"/>
-                        </div>
-                        <button className="submit-button" type="submit" >Confirm</button>
-                    </form>
-                </TransitionModal>
-            </tr>
-    )
-}
+export default ListItem;

@@ -1,0 +1,22 @@
+.actionButtons {
+    cursor: pointer;
+    color: disable;
+    margin: 10px;
+    color: #242e3e;
+    border: none;
+    background: white
+}
+
+.ulStyle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 5px;
+    list-style:none;
+    border-bottom: 1px solid #e3e2e4
+}
+
+.liStyle {
+    width: 16%;
+    text-align: center;
+}
