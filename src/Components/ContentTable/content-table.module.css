@@ -5,7 +5,8 @@
     font-weight: normal;
 }
 
-.tableCell th {
+
+.tableCell th, td {
     border-bottom: 1px solid #707070;
 }
 
