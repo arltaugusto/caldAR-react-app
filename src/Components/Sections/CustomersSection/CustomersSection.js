@@ -3,12 +3,15 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { useDispatch } from 'react-redux';
 import ContentTable from '../../ContentTable/ContentTable';
 import TransitionModal from '../../TransitionModal/TransitionModal';
 import FormSelect from '../../TransitionModal/Select/Select';
 import customerSectionStyles from './customer-section.module.css';
+import updateTitle from '../../../redux/actions/index';
 
-const CustomersSection = (props) => {
+const CustomersSection = () => {
+  const dispatch = useDispatch();
   const [customersData, setCustomersData] = useState([]);
   const [customSearchData, setCustomSearchData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -67,7 +70,7 @@ const CustomersSection = (props) => {
   };
 
   useEffect(() => {
-    props.setHeaderTitle('Customers');
+    dispatch(updateTitle('Customers'));
     fetchCustomersData();
   }, []);
 

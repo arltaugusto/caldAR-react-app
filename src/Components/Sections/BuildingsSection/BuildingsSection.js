@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
+import { useDispatch } from 'react-redux';
 import buildings from '../../../data/mock_buildings.json';
 import AddBuilding from './AddBuilding';
 import BuildingsItem from './BuildingsItem';
+import updateTitle from '../../../redux/actions/index';
 
-const BuildingsSection = (props) => {
+const BuildingsSection = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    props.setHeaderTitle('Buildings');
+    dispatch(updateTitle('Buildings'));
   }, []);
 
   const [buildingForm, setBuildingForm] = useState({

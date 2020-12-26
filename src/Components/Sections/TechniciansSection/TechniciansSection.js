@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
+import { useDispatch } from 'react-redux';
 import technicians from '../../../data/technicians.json';
 import AddTechnician from './AddTechnician';
 import TechnicianItem from './TechnicianItem';
 import './technicians-section.css';
+import updateTitle from '../../../redux/actions/index';
 
-const TechniciansSection = (props) => {
+const TechniciansSection = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    props.setHeaderTitle('Technicians');
+    dispatch(updateTitle('Technicians'));
   });
   const [techniciansForm, setTechniciansForm] = useState({
     firstName: '',
