@@ -8,6 +8,7 @@ const ContentTable = (props) => (
                 <thead className={tableStyles.tableTitles}>
                     <tr>
                         {props.columns.map((column) => <th key={column}>{column}</th>)}
+                        <th>Actions</th>)
                     </tr>
                 </thead>
                 {
