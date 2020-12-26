@@ -1,0 +1,75 @@
+[{
+    "id": 1,
+    "address": "125 Kensington ",
+    "name": "Roberta",
+    "phone": "458-849-2483",
+    "idCustomer": 93,
+    "boilers": [
+      1,2
+    ]
+  }, {
+    "id": 2,
+    "address": "7 Mayfield Road",
+    "name": "Tyrone",
+    "phone": "875-310-7281",
+    "idCustomer": 58,
+    "boilers": [2,3
+    ]
+  }, {
+    "id": 3,
+    "address": "288 Springview Trail",
+    "name": "Boycey",
+    "phone": "483-938-2979",
+    "idCustomer": 16,
+    "boilers": [4,5
+    ]
+  }, {
+    "id": 4,
+    "address": "20 Gulseth Trail",
+    "name": "Wernher",
+    "phone": "937-377-8371",
+    "idCustomer": 13,
+    "boilers": [6,7]
+  }, {
+    "id": 5,
+    "address": "375 6th Road",
+    "name": "Findley",
+    "phone": "236-236-2558",
+    "idCustomer": 54,
+    "boilers": [9,10]
+  }, {
+    "id": 6,
+    "address": "23 Mayfield Hill",
+    "name": "Nat",
+    "phone": "439-134-3046",
+    "idCustomer": 44,
+    "boilers": [11,12]
+  }, {
+    "id": 7,
+    "address": "3 Warbler Terrace",
+    "name": "Gan",
+    "phone": "477-889-0469",
+    "idCustomer": 4,
+    "boilers": [13,14]
+  }, {
+    "id": 8,
+    "address": "576 Caliangt Avenue",
+    "name": "Aliza",
+    "phone": "420-293-3291",
+    "idCustomer": 87,
+    "boilers": [15,16]
+  }, {
+    "id": 9,
+    "address": "19208 Kenwood Circle",
+    "name": "Silva",
+    "phone": "151-341-9018",
+    "idCustomer": 59,
+    "boilers": [17,18]
+  }, {
+    "id": 10,
+    "address": "37 North Place",
+    "name": "Merralee",
+    "phone": "550-262-6418",
+    "idCustomer": 36,
+    "boilers": [19,20]
+  }]
