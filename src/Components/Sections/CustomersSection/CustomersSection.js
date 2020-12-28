@@ -3,37 +3,33 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ContentTable from '../../ContentTable/ContentTable';
 import TransitionModal from '../../TransitionModal/TransitionModal';
 import FormSelect from '../../TransitionModal/Select/Select';
 import customerSectionStyles from './customer-section.module.css';
 import updateTitle from '../../../redux/actions/index';
+import { fetchCustomers, onFetchCustomerSucced } from '../../../redux/actions/customer';
 
 const CustomersSection = () => {
   const dispatch = useDispatch();
-  const [customersData, setCustomersData] = useState([]);
+  const customersState = useSelector((state) => state.customersReducer);
+  const [shouldOpenModal, setShouldOpenModal] = useState(false);
   const [customSearchData, setCustomSearchData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [shouldOpenModal, setOpenModal] = useState(false);
   const [addCustomerForm, setAddCustomerForm] = useState({
     query: '',
     email: '',
     address: '',
     type: 'particular',
   });
-
   const customerTypes = [
     { value: 'business', label: 'Business' },
     { value: 'particular', label: 'Particular' },
   ];
 
-  const fetchCustomersData = async () => {
+  const fetchCustomersData = () => {
     try {
-      const response = await fetch('https://run.mocky.io/v3/50509042-84f5-40d8-8a84-a67ab2a0d737');
-      const data = await response.json();
-      setCustomersData(data);
-      setIsLoading(false);
+      dispatch(fetchCustomers());
     } catch (e) {
       console.log(e);
     }
@@ -48,16 +44,18 @@ const CustomersSection = () => {
     );
   };
 
+  // FIXME handle with redux
   const removeFromList = (id) => {
-    const customerDataCopy = [...customersData];
+    const customerDataCopy = [...customersState.customersData];
     const updatedData = customerDataCopy.filter((customer) => customer.id !== id);
-    setCustomersData(updatedData);
+    dispatch(onFetchCustomerSucced(updatedData));
     // This update is needed in case the user wants to delete in a search
     setCustomSearchData(getFilteredData(updatedData, addCustomerForm.query));
   };
 
+  // FIXME handle with redux
   const handleUpdate = (newItem) => {
-    const customersCpy = [...customersData];
+    const customersCpy = [...customersState.customersData];
     const updatedArray = customersCpy.map((value) => {
       if (value.id === newItem.id) {
         return newItem;
@@ -66,7 +64,7 @@ const CustomersSection = () => {
     });
     // This update is needed in case the user wants to edit in a search
     setCustomSearchData(getFilteredData(updatedArray, addCustomerForm.query));
-    setCustomersData(updatedArray);
+    dispatch(onFetchCustomerSucced(updatedArray));
   };
 
   useEffect(() => {
@@ -74,13 +72,14 @@ const CustomersSection = () => {
     fetchCustomersData();
   }, []);
 
+  // FIXME handle with redux
   const handleOpen = () => {
-    setOpenModal(true);
+    setShouldOpenModal(true);
   };
 
   const handleSearchInput = (event) => {
     const query = event.target.value;
-    const customerDataCopy = [...customersData];
+    const customerDataCopy = [...customersState.customersData];
     const filteredData = getFilteredData(customerDataCopy, query);
     setAddCustomerForm({
       ...addCustomerForm,
@@ -89,6 +88,7 @@ const CustomersSection = () => {
     setCustomSearchData(filteredData);
   };
 
+  // Should I implement redux, I'm not sending it as a prop to any component?
   const handleSubmit = (event) => {
     event.preventDefault();
     const newItem = {
@@ -98,9 +98,9 @@ const CustomersSection = () => {
       address: addCustomerForm.address,
       buildings: 'None',
     };
-    const customerDataCopy = [...customersData];
+    const customerDataCopy = [...customersState.customersData];
     customerDataCopy.push(newItem);
-    setCustomersData(customerDataCopy);
+    dispatch(onFetchCustomerSucced(customerDataCopy));
     setCustomSearchData(getFilteredData(customerDataCopy, addCustomerForm.query));
     setAddCustomerForm({
       query: '',
@@ -108,7 +108,7 @@ const CustomersSection = () => {
       address: '',
       type: 'particular',
     });
-    setOpenModal(false);
+    setShouldOpenModal(false);
   };
 
   const onInputChange = (event) => {
@@ -138,37 +138,41 @@ submitHanlder: function on submit
       </form>
   );
 
+  if (customersState.isLoading) {
+    return (
+      <div className={customerSectionStyles.contentContainer}>
+        <CircularProgress />
+      </div>
+    );
+  }
+
   return (
     <div className={customerSectionStyles.contentContainer}>
-          {isLoading // This is just the spinner during the data fetch
-            ? <div className={customerSectionStyles.content}>
-              <CircularProgress />
-            </div>
-            : <div className={customerSectionStyles.center}>
-                <div className={customerSectionStyles.tableContainer}>
-                  <div className={customerSectionStyles.searchBarCointainer}>
-                    <SearchIcon style={{ marginTop: '10px' }}/>
-                    <input onChange={handleSearchInput} placeHolder="Search"/>
-                  </div>
-                  <ContentTable
-                    columns={['Type Of Client', 'Email', 'Address', 'Buildings']}
-                    items={customSearchData.length || addCustomerForm.query
-                      ? customSearchData : customersData}
-                    notToShowKeys={['id']}
-                    getForm={getForm}
-                    handleUpdate={handleUpdate}
-                    updateTitle='Update customer'
-                    removeFromListCallback={removeFromList}
-                  />
-                </div>
-                <div onClick={handleOpen} className={customerSectionStyles.addButtonContainer}>
-                  <AddCircleIcon style={ { color: '#8325FE', width: 60, height: 60 }}/>
-                </div>
-            </div>
-          }
-          <TransitionModal setModal={setOpenModal} handleOpen={handleOpen} title="Add new Customer" open={shouldOpenModal} >
-            {getForm(addCustomerForm, onInputChange, handleSubmit)}
-          </TransitionModal>
+      <div className={customerSectionStyles.center}>
+        <div className={customerSectionStyles.tableContainer}>
+          <div className={customerSectionStyles.searchBarCointainer}>
+            <SearchIcon style={{ marginTop: '10px' }}/>
+            <input onChange={handleSearchInput} placeHolder="Search"/>
+          </div>
+          {console.log(customersState)}
+          <ContentTable
+            columns={['Type Of Client', 'Email', 'Address', 'Buildings']}
+            items={customSearchData.length || addCustomerForm.query
+              ? customSearchData : customersState.customersData}
+            notToShowKeys={['id']}
+            getForm={getForm}
+            handleUpdate={handleUpdate}
+            updateTitle='Update customer'
+            removeFromListCallback={removeFromList}
+          />
+        </div>
+        <div onClick={handleOpen} className={customerSectionStyles.addButtonContainer}>
+          <AddCircleIcon style={ { color: '#8325FE', width: 60, height: 60 }}/>
+        </div>
+      </div>
+      <TransitionModal setModal={setShouldOpenModal} handleOpen={handleOpen} title="Add new Customer" open={shouldOpenModal} >
+        {getForm(addCustomerForm, onInputChange, handleSubmit)}
+      </TransitionModal>
     </div>
   );
 };
