@@ -20,6 +20,7 @@ module.exports = {
     ],
     "rules": {
         "react/prop-types": 0,
-        "import/no-named-as-default": 0
+        "import/no-named-as-default": 0,
+        'no-underscore-dangle': 0
     }
 };

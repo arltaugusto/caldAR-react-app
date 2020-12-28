@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import updateTitle from '../../../redux/actions/index';
 
-const BoilersSection = (props) => {
+const BoilersSection = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    props.setHeaderTitle('Boilers');
+    dispatch(updateTitle('Boilers'));
   });
   return (
         <h1>TODO BOLIERS</h1>
