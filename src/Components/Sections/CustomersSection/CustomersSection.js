@@ -45,15 +45,6 @@ const CustomersSection = () => {
   };
 
   // FIXME handle with redux
-  const removeFromList = (id) => {
-    const customerDataCopy = [...customersState.customersData];
-    const updatedData = customerDataCopy.filter((customer) => customer.id !== id);
-    dispatch(onFetchCustomerSucced(updatedData));
-    // This update is needed in case the user wants to delete in a search
-    setCustomSearchData(getFilteredData(updatedData, addCustomerForm.query));
-  };
-
-  // FIXME handle with redux
   const handleUpdate = (newItem) => {
     const customersCpy = [...customersState.customersData];
     const updatedArray = customersCpy.map((value) => {
@@ -157,7 +148,7 @@ submitHanlder: function on submit
             getForm={getForm}
             handleUpdate={handleUpdate}
             updateTitle='Update customer'
-            removeFromListCallback={removeFromList}
+            removeAction='deleteCustomer'
           />
         </div>
         <div onClick={handleOpen} className={customerSectionStyles.addButtonContainer}>

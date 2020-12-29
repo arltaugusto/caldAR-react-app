@@ -21,7 +21,7 @@ const ContentTable = (props) => (
                                 getForm={props.getForm}
                                 handleUpdate={props.handleUpdate}
                                 updateTitle={props.updateTitle}
-                                removeFromListCallback={props.removeFromListCallback}
+                                deleteAction={props.removeAction}
                         />)
                     }
                 </tbody>

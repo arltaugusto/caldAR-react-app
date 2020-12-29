@@ -14,7 +14,7 @@ export const addNewCustomer = (customer) => ({
   payload: customer,
 });
 
-// FIXME export back origin as a constant
+// FIXME export back origin url as a constant
 export const fetchCustomers = () => async (dispatch) => {
   dispatch(fetchCustomersRequest());
   try {
@@ -28,7 +28,6 @@ export const fetchCustomers = () => async (dispatch) => {
 
 export const addCustomer = (newItem) => async (dispatch) => {
   try {
-    console.log(JSON.stringify(newItem));
     const response = await fetch('http://localhost:3001/api/customers/', {
       method: 'post',
       headers: {
@@ -40,5 +39,21 @@ export const addCustomer = (newItem) => async (dispatch) => {
     dispatch(addNewCustomer(json));
   } catch (e) {
     console.log('Unable too add', e);
+  }
+};
+
+export const deleteCustomer = (customerId) => async (dispatch, getState) => {
+  try {
+    const response = await fetch(`http://localhost:3001/api/customers/${customerId}`, {
+      method: 'delete',
+    });
+    if (response.status === 200) {
+      const { customersReducer } = getState();
+      const customersCopy = [...customersReducer.customersData];
+      dispatch(onFetchCustomerSucced(customersCopy.filter((cus) => cus._id !== customerId)));
+    }
+    console.log(response);
+  } catch (e) {
+    console.log('Unable to delete', e);
   }
 };
