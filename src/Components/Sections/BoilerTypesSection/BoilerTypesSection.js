@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import updateTitle from '../../../redux/actions/index';
 import BoilerTypes from '../../../data/BoilerTypesMOCK.json';
 import BoilerTypeItem from './BoilerTypeItem';
 import AddBoilerType from './AddBoilerType';
 import './BoilerType.css';
 
-const BoilerTypesSection = (props) => {
+const BoilerTypesSection = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    props.setHeaderTitle('Boiler Types');
+    dispatch(updateTitle('Boiler Types'));
   }, []);
 
   const [boilerTypeForm, setBoilerTypeForm] = useState({

@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { bindActionCreators } from 'redux';
 import { v4 as uuid } from 'uuid';
-import buildings from '../../../data/mock_buildings.json';
+import { useDispatch, connect } from 'react-redux';
 import AddBuilding from './AddBuilding';
 import BuildingsItem from './BuildingsItem';
+import updateTitle from '../../../redux/actions/index';
+import { addBuildingR, deleteBuilding } from '../../../redux/actions/buildingsActions';
 
 const BuildingsSection = (props) => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    props.setHeaderTitle('Buildings');
+    dispatch(updateTitle('Buildings'));
   }, []);
 
   const [buildingForm, setBuildingForm] = useState({
@@ -18,7 +22,7 @@ const BuildingsSection = (props) => {
     boilers: [],
   });
 
-  const [allBuildings, setAllBuildings] = useState(buildings);
+  const [allBuildings, setAllBuildings] = useState(props.buildings.list);
 
   // Add Building
   const addBuilding = () => {
@@ -43,18 +47,29 @@ const BuildingsSection = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addBuilding();
+    const newBuilding = {
+      id: uuid(),
+      address: buildingForm.address,
+      name: buildingForm.name,
+      phone: buildingForm.phone,
+      idCustomer: buildingForm.idCustomer,
+      boilers: buildingForm.boilers,
+    };
+    addBuilding(newBuilding);
+    setBuildingForm({
+      id: '',
+      address: '',
+      name: '',
+      phone: '',
+      idCustomer: '',
+      boilers: [],
+    });
   };
 
   const onChange = (e) => setBuildingForm({
     ...buildingForm,
     [e.target.name]: e.target.value,
   });
-
-  // Delete Building
-  const deleteBuilding = (id) => {
-    setAllBuildings([...allBuildings.filter((building) => building.id !== id)]);
-  };
 
   // Update Building
 
@@ -76,21 +91,30 @@ const BuildingsSection = (props) => {
         <li className="liStyle">Boilers</li>
         <li className="liStyle">Actions</li>
       </ul>
-      {allBuildings.map((building) => (
+      {props.buildings.list.map((building) => (
         <BuildingsItem
           key={building.id}
           building={building}
-          deleteBuilding={deleteBuilding}
+          deleteBuilding={props.deleteBuilding}
           updateBuilding={updateBuilding}
         />
       ))}
       <AddBuilding
-      addBuilding={addBuilding}
       onChange={onChange}
       onSubmit={onSubmit}
-      buildingForm={buildingForm} />
+      buildingForm={buildingForm}
+      />
     </div>
   );
 };
 
-export default BuildingsSection;
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  addBuildingR,
+  deleteBuilding,
+}, dispatch);
+
+const mapStateToProps = (state) => ({
+  buildings: state.buildingsReducer,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BuildingsSection);
