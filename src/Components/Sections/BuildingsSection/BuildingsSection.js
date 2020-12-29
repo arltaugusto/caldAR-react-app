@@ -72,14 +72,14 @@ const BuildingsSection = (props) => {
     [e.target.name]: e.target.value,
   });
 
-  // Update Building
+  // // Update Building
 
-  const updateBuilding = (buildingUpdate) => {
-    const buildingsCopy = [...allBuildings];
-    const updatedBuilding = buildingsCopy.map((item) => (item.id === buildingUpdate.id
-      ? buildingUpdate : item));
-    setAllBuildings(updatedBuilding);
-  };
+  // const updateBuilding = (buildingUpdate) => {
+  //   const buildingsCopy = [...allBuildings];
+  //   const updatedBuilding = buildingsCopy.map((item) => (item.id === buildingUpdate.id
+  //     ? buildingUpdate : item));
+  //   setAllBuildings(updatedBuilding);
+  // };
 
   return (
     <div>
@@ -97,7 +97,7 @@ const BuildingsSection = (props) => {
           key={building.id}
           building={building}
           deleteBuilding={props.deleteBuilding}
-          updateBuilding={updateBuilding}
+          // updateBuilding={updateBuilding}
         />
       ))}
       <AddBuilding

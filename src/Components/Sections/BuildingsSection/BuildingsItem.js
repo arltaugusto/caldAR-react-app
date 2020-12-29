@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { FaPen, FaTrash } from 'react-icons/fa';
+import { updateBuildingR } from '../../../redux/actions/buildingsActions';
 import './CustomersItems.css';
 
 const BuildingsItem = (props) => {
@@ -24,7 +27,7 @@ const BuildingsItem = (props) => {
 
   const saveChanges = () => {
     toggleEdit();
-    props.updateBuilding(buildingsItem);
+    props.updateBuildingR(buildingsItem);
   };
 
   if (buildingsItem.isEditing) {
@@ -49,19 +52,19 @@ const BuildingsItem = (props) => {
           onChange={onChange}
         />
         <input
-          type='number'
+          // type='number'
           name='phone'
           value={buildingsItem.phone}
           onChange={onChange}
         />
         <input
-          type='number'
+          // type='number'
           name='idCustomer'
           value={buildingsItem.idCustomer}
           onChange={onChange}
         />
         <input
-          type='number'
+          // type='number'
           name='boilers'
           value={buildingsItem.boilers}
           onChange={onChange}
@@ -90,4 +93,12 @@ const BuildingsItem = (props) => {
   );
 };
 
-export default BuildingsItem;
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  updateBuildingR,
+}, dispatch);
+
+const mapStateToProps = (state) => ({
+  buildings: state.buildingsReducer,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BuildingsItem);
