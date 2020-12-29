@@ -47,6 +47,7 @@ const BuildingsSection = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    props.addBuildingR(buildingForm);
     const newBuilding = {
       id: uuid(),
       address: buildingForm.address,
