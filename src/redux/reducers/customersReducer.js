@@ -1,4 +1,4 @@
-import { FETCH_CUSTOMERS_REQUEST, FETCH_CUSTOMERS } from '../types/customers';
+import { FETCH_CUSTOMERS_REQUEST, FETCH_CUSTOMERS, ADD_CUSTOMER } from '../types/customers';
 
 const initialState = {
   customersData: [],
@@ -17,6 +17,11 @@ const customerReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         customersData: action.payload,
+      };
+    case ADD_CUSTOMER:
+      return {
+        ...state,
+        customersData: [...state.customersData, action.payload],
       };
     default: {
       return state;

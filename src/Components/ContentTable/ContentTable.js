@@ -14,8 +14,8 @@ const ContentTable = (props) => (
                 <tbody>
                     {
                         props.items.map((value) => <ListItem
-                                key={value.id}
-                                id={value.id}
+                                key={value._id}
+                                id={value._id}
                                 item={value}
                                 notToShowKeys={props.notToShowKeys}
                                 getForm={props.getForm}

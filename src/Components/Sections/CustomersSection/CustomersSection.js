@@ -9,7 +9,7 @@ import TransitionModal from '../../TransitionModal/TransitionModal';
 import FormSelect from '../../TransitionModal/Select/Select';
 import customerSectionStyles from './customer-section.module.css';
 import updateTitle from '../../../redux/actions/index';
-import { fetchCustomers, onFetchCustomerSucced } from '../../../redux/actions/customer';
+import { fetchCustomers, onFetchCustomerSucced, addCustomer } from '../../../redux/actions/customer';
 
 const CustomersSection = () => {
   const dispatch = useDispatch();
@@ -92,16 +92,11 @@ const CustomersSection = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newItem = {
-      id: Math.floor(Math.random() * 10000),
       type: addCustomerForm.type,
       email: addCustomerForm.email,
       address: addCustomerForm.address,
-      buildings: 'None',
     };
-    const customerDataCopy = [...customersState.customersData];
-    customerDataCopy.push(newItem);
-    dispatch(onFetchCustomerSucced(customerDataCopy));
-    setCustomSearchData(getFilteredData(customerDataCopy, addCustomerForm.query));
+    dispatch(addCustomer(newItem));
     setAddCustomerForm({
       query: '',
       email: '',
@@ -154,12 +149,11 @@ submitHanlder: function on submit
             <SearchIcon style={{ marginTop: '10px' }}/>
             <input onChange={handleSearchInput} placeHolder="Search"/>
           </div>
-          {console.log(customersState)}
           <ContentTable
-            columns={['Type Of Client', 'Email', 'Address', 'Buildings']}
+            columns={['Buildings', 'Type Of Client', 'Address', 'Email']}
             items={customSearchData.length || addCustomerForm.query
               ? customSearchData : customersState.customersData}
-            notToShowKeys={['id']}
+            notToShowKeys={['id', '_id', 'createdAt', 'updatedAt', '__v']}
             getForm={getForm}
             handleUpdate={handleUpdate}
             updateTitle='Update customer'
