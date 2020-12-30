@@ -1,4 +1,6 @@
-import { FETCH_CUSTOMERS_REQUEST, FETCH_CUSTOMERS, ADD_CUSTOMER } from '../types/customers';
+import {
+  FETCH_CUSTOMERS_REQUEST, FETCH_CUSTOMERS, ADD_CUSTOMER,
+} from '../types/customers';
 
 export const fetchCustomersRequest = () => ({
   type: FETCH_CUSTOMERS_REQUEST,
@@ -52,8 +54,27 @@ export const deleteCustomer = (customerId) => async (dispatch, getState) => {
       const customersCopy = [...customersReducer.customersData];
       dispatch(onFetchCustomerSucced(customersCopy.filter((cus) => cus._id !== customerId)));
     }
-    console.log(response);
   } catch (e) {
     console.log('Unable to delete', e);
+  }
+};
+
+export const updateCustomerFetch = (updatedItem) => async (dispatch, getState) => {
+  try {
+    const response = await fetch(`http://localhost:3001/api/customers/${updatedItem._id}`, {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedItem),
+    });
+    const resJson = await response.json();
+    const { customersReducer } = getState();
+    const customersCopy = [...customersReducer.customersData];
+    const updatedArray = customersCopy.map((custom) => (custom._id === resJson.data._id
+      ? resJson.data : custom));
+    dispatch(onFetchCustomerSucced(updatedArray));
+  } catch (e) {
+    console.log('Unable to update', e);
   }
 };

@@ -19,7 +19,7 @@ const ContentTable = (props) => (
                                 item={value}
                                 notToShowKeys={props.notToShowKeys}
                                 getForm={props.getForm}
-                                handleUpdate={props.handleUpdate}
+                                updateAction={props.updateAction}
                                 updateTitle={props.updateTitle}
                                 deleteAction={props.removeAction}
                         />)

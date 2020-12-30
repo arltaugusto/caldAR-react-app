@@ -1,4 +1,6 @@
-import { FETCH_CUSTOMERS_REQUEST, FETCH_CUSTOMERS, ADD_CUSTOMER } from '../types/customers';
+import {
+  FETCH_CUSTOMERS_REQUEST, FETCH_CUSTOMERS, ADD_CUSTOMER,
+} from '../types/customers';
 
 const initialState = {
   customersData: [],

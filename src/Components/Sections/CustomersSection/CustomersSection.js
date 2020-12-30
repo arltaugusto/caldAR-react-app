@@ -9,7 +9,7 @@ import TransitionModal from '../../TransitionModal/TransitionModal';
 import FormSelect from '../../TransitionModal/Select/Select';
 import customerSectionStyles from './customer-section.module.css';
 import updateTitle from '../../../redux/actions/index';
-import { fetchCustomers, onFetchCustomerSucced, addCustomer } from '../../../redux/actions/customer';
+import { fetchCustomers, addCustomer } from '../../../redux/actions/customer';
 
 const CustomersSection = () => {
   const dispatch = useDispatch();
@@ -44,26 +44,11 @@ const CustomersSection = () => {
     );
   };
 
-  // FIXME handle with redux
-  const handleUpdate = (newItem) => {
-    const customersCpy = [...customersState.customersData];
-    const updatedArray = customersCpy.map((value) => {
-      if (value.id === newItem.id) {
-        return newItem;
-      }
-      return value;
-    });
-    // This update is needed in case the user wants to edit in a search
-    setCustomSearchData(getFilteredData(updatedArray, addCustomerForm.query));
-    dispatch(onFetchCustomerSucced(updatedArray));
-  };
-
   useEffect(() => {
     dispatch(updateTitle('Customers'));
     fetchCustomersData();
   }, []);
 
-  // FIXME handle with redux
   const handleOpen = () => {
     setShouldOpenModal(true);
   };
@@ -146,7 +131,7 @@ submitHanlder: function on submit
               ? customSearchData : customersState.customersData}
             notToShowKeys={['id', '_id', 'createdAt', 'updatedAt', '__v']}
             getForm={getForm}
-            handleUpdate={handleUpdate}
+            updateAction='updateCustomerFetch'
             updateTitle='Update customer'
             removeAction='deleteCustomer'
           />

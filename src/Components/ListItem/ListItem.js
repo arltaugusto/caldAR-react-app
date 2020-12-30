@@ -4,10 +4,11 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useDispatch } from 'react-redux';
 import TransitionModal from '../TransitionModal/TransitionModal';
-import { deleteCustomer } from '../../redux/actions/customer';
+import { deleteCustomer, updateCustomerFetch } from '../../redux/actions/customer';
 
 const itemActions = {
   deleteCustomer,
+  updateCustomerFetch,
 };
 
 const ListItem = (props) => {
@@ -42,7 +43,7 @@ const ListItem = (props) => {
 
   const handleUpdateSubmit = (event) => {
     event.preventDefault();
-    props.handleUpdate(getNewItem());
+    dispatch(itemActions[props.updateAction](getNewItem()));
     setShouldOpenModal(false);
   };
 
