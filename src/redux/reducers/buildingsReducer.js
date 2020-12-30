@@ -2,7 +2,7 @@ import { ADD_BUILDING, DELETE_BUILDING, UPDATE_BUILDING } from '../types/buildin
 import buildings from '../../data/mock_buildings.json';
 
 const initialState = {
-  list: buildings,
+  list: [...buildings],
 };
 
 const buildingsReducer = (state = initialState, action) => {
@@ -20,18 +20,18 @@ const buildingsReducer = (state = initialState, action) => {
         ...state,
         list: state.list.filter((building) => building.id !== action.payload),
       };
-    case UPDATE_BUILDING:
+    case UPDATE_BUILDING: {
       return {
-        ...state.map((building) => {
-          let buildingUpdated = [];
+        list: [...state.list.map((building) => {
           if (building.id === action.payload.id) {
-            buildingUpdated = action.payload;
+            return action.payload;
           }
-          return buildingUpdated;
-        }),
+          return building;
+        })],
       };
+    }
     default:
-      return state;
+      return { ...state };
   }
 };
 

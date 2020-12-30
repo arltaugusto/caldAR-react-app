@@ -25,6 +25,14 @@ const BuildingsItem = (props) => {
     });
   };
 
+  // Update Building
+
+  // const updateBuilding = (item) => {
+  //   const buildingsCopy = [...props.allBuildings];
+  //   return buildingsCopy.map((content) => (content.id === item.id
+  //     ? item : content));
+  // };
+
   const saveChanges = () => {
     toggleEdit();
     props.updateBuildingR(buildingsItem);

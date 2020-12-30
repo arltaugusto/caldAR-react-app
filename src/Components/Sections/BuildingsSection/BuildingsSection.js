@@ -72,15 +72,6 @@ const BuildingsSection = (props) => {
     [e.target.name]: e.target.value,
   });
 
-  // // Update Building
-
-  // const updateBuilding = (buildingUpdate) => {
-  //   const buildingsCopy = [...allBuildings];
-  //   const updatedBuilding = buildingsCopy.map((item) => (item.id === buildingUpdate.id
-  //     ? buildingUpdate : item));
-  //   setAllBuildings(updatedBuilding);
-  // };
-
   return (
     <div>
       <ul className="ulStyle">
@@ -96,8 +87,8 @@ const BuildingsSection = (props) => {
         <BuildingsItem
           key={building.id}
           building={building}
+          allBuildings={allBuildings}
           deleteBuilding={props.deleteBuilding}
-          // updateBuilding={updateBuilding}
         />
       ))}
       <AddBuilding
