@@ -5,14 +5,16 @@ import { useDispatch, connect } from 'react-redux';
 import AddBuilding from './AddBuilding';
 import BuildingsItem from './BuildingsItem';
 import updateTitle from '../../../redux/actions/index';
-import { addBuildingR, deleteBuilding } from '../../../redux/actions/buildingsActions';
+import {
+  getBuildings,
+  deleteBuilding,
+  addBuilding,
+  updateBuilding,
+} from '../../../redux/actions/buildingsActions';
 
 const BuildingsSection = (props) => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(updateTitle('Buildings'));
-  }, []);
-
+  const [allBuildings, setAllBuildings] = useState(props.buildings.list);
   const [buildingForm, setBuildingForm] = useState({
     id: '',
     address: '',
@@ -22,10 +24,24 @@ const BuildingsSection = (props) => {
     boilers: [],
   });
 
-  const [allBuildings, setAllBuildings] = useState(props.buildings.list);
+  useEffect(() => {
+    dispatch(updateTitle('Buildings'));
+  }, []);
+
+  useEffect(() => {
+    props.getBuildings();
+  }, [props.getBuildings]);
+
+  if (props.buildings.isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (props.buildings.error) {
+    return <div>ERROR!!!</div>;
+  }
 
   // Add Building
-  const addBuilding = () => {
+  const addBuildingForm = () => {
     const newBuilding = {
       id: uuid(),
       address: buildingForm.address,
@@ -47,16 +63,16 @@ const BuildingsSection = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    props.addBuildingR(buildingForm);
+    props.addBuilding(buildingForm);
     const newBuilding = {
-      id: uuid(),
+      // id: uuid(),
       address: buildingForm.address,
       name: buildingForm.name,
       phone: buildingForm.phone,
       idCustomer: buildingForm.idCustomer,
       boilers: buildingForm.boilers,
     };
-    addBuilding(newBuilding);
+    addBuildingForm(newBuilding);
     setBuildingForm({
       id: '',
       address: '',
@@ -85,10 +101,12 @@ const BuildingsSection = (props) => {
       </ul>
       {props.buildings.list.map((building) => (
         <BuildingsItem
-          key={building.id}
+          key={building._id}
           building={building}
           allBuildings={allBuildings}
           deleteBuilding={props.deleteBuilding}
+          getBuildings={props.getBuildings}
+          updateBuilding={props.updateBuilding}
         />
       ))}
       <AddBuilding
@@ -101,8 +119,10 @@ const BuildingsSection = (props) => {
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  addBuildingR,
+  addBuilding,
   deleteBuilding,
+  getBuildings,
+  updateBuilding,
 }, dispatch);
 
 const mapStateToProps = (state) => ({

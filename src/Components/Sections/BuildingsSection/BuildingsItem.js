@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FaPen, FaTrash } from 'react-icons/fa';
-import { updateBuildingR } from '../../../redux/actions/buildingsActions';
+import { updateBuilding } from '../../../redux/actions/buildingsActions';
 import './CustomersItems.css';
 
 const BuildingsItem = (props) => {
@@ -27,15 +27,9 @@ const BuildingsItem = (props) => {
 
   // Update Building
 
-  // const updateBuilding = (item) => {
-  //   const buildingsCopy = [...props.allBuildings];
-  //   return buildingsCopy.map((content) => (content.id === item.id
-  //     ? item : content));
-  // };
-
   const saveChanges = () => {
     toggleEdit();
-    props.updateBuildingR(buildingsItem);
+    props.updateBuilding(buildingsItem);
   };
 
   if (buildingsItem.isEditing) {
@@ -72,7 +66,7 @@ const BuildingsItem = (props) => {
           onChange={onChange}
         />
         <input
-          // type='number'
+          type='string'
           name='boilers'
           value={buildingsItem.boilers}
           onChange={onChange}
@@ -87,7 +81,7 @@ const BuildingsItem = (props) => {
 
   return (
     <ul className="ulStyle">
-      <li className="liStyle">{props.building.id}</li>
+      <li className="liStyle">{props.building._id}</li>
       <li className="liStyle">{props.building.address}</li>
       <li className="liStyle">{props.building.name}</li>
       <li className="liStyle">{props.building.phone}</li>
@@ -95,14 +89,14 @@ const BuildingsItem = (props) => {
       <li className="liStyle">{props.building.boilers}</li>
       <div className="liStyle">
           <button onClick={toggleEdit} className="actionButtons"><FaPen size={20}/></button>
-          <button onClick={() => props.deleteBuilding(props.building.id)} className="actionButtons"><FaTrash size={20}/></button>
+          <button onClick={() => props.deleteBuilding(props.building._id)} className="actionButtons"><FaTrash size={20}/></button>
       </div>
     </ul>
   );
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  updateBuildingR,
+  updateBuilding,
 }, dispatch);
 
 const mapStateToProps = (state) => ({

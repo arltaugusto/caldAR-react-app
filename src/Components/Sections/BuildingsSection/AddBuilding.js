@@ -5,8 +5,8 @@ const AddBuilding = (props) => (
     <input type='text' name='address' placeholder='Address' value={props.buildingForm.address} onChange={props.onChange} />
     <input type='text' name='name' placeholder='Name' value={props.buildingForm.name} onChange={props.onChange}/>
     <input type='number' name='phone' placeholder='Phone' value={props.buildingForm.phone} onChange={props.onChange}/>
-    <input type='number' name='idCustomer' placeholder='IdCustomer' value={props.buildingForm.idCustomer} onChange={props.onChange}/>
-    <input type='number' name='boilers' placeholder='Boilers' value={props.buildingForm.boilers} onChange={props.onChange}/>
+    <input type='string' name='idCustomer' placeholder='IdCustomer' value={props.buildingForm.idCustomer} onChange={props.onChange}/>
+    <input type='string' name='boilers' placeholder='Boilers' value={props.buildingForm.boilers} onChange={props.onChange}/>
     <input type='submit' value='Send' />
   </form>
 );
