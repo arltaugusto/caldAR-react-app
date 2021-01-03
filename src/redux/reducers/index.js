@@ -1,11 +1,10 @@
 import { combineReducers } from 'redux';
 import headerReducer from './header';
-import customersReducer from './customersReducer';
-import boilerTypeReducer from './boilerTypeReducer';
+import boilerTypesReducer from './boilerTypeReducer';
 
 const allReducers = combineReducers({
   headerReducer,
-  boilerTypeReducer,
+  boilerTypesReducer,
 });
 
 export default allReducers;

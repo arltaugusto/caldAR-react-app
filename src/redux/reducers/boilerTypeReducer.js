@@ -1,42 +1,102 @@
+/* eslint-disable no-param-reassign, no-underscore-dangle */
 import {
-  FETCH_BOILERTYPE_REQUEST, FETCH_BOILER_TYPE, ADD_BOILER_TYPE,
-  DELETE_BOILER_TYPE, UPDATE_BOILER_TYPE,
+  GET_BOILERTYPES_FETCHING,
+  GET_BOILERTYPES_FULFILLED,
+  GET_BOILERTYPES_REJECTED,
+  ADD_BOILERTYPE_FETCHING,
+  ADD_BOILERTYPE_FULFILLED,
+  ADD_BOILERTYPE_REJECTED,
+  DELETE_BOILERTYPE_FETCHING,
+  DELETE_BOILERTYPE_FULFILLED,
+  DELETE_BOILERTYPE_REJECTED,
+  UPDATE_BOILERTYPE_FETCHING,
+  UPDATE_BOILERTYPE_FULFILLED,
+  UPDATE_BOILERTYPE_REJECTED,
 } from '../types/boilerType';
-import boilerTypes from '../../data/BoilerTypesMOCK.json';
 
-const boilerTypeReducer = (state = boilerTypes, action) => {
+const initialState = {
+  isLoading: false,
+  list: [],
+  error: false,
+};
+
+const boilerTypesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_BOILERTYPE_REQUEST:
+    case GET_BOILERTYPES_FETCHING:
       return {
         ...state,
         isLoading: true,
       };
-    case FETCH_BOILER_TYPE:
+    case GET_BOILERTYPES_FULFILLED:
       return {
         ...state,
         isLoading: false,
-        boilerTypeData: action.payload,
+        list: action.payload,
       };
-    case ADD_BOILER_TYPE: {
-      return [...state, action.payload];
-    }
-    case DELETE_BOILER_TYPE: {
-      return [...state.filter((boilerType) => boilerType.number !== action.payload)];
-    }
-    case UPDATE_BOILER_TYPE: {
-      return [
-        ...state.map((boilerType) => {
-          if (boilerType.number === action.payload.number) {
-            boilerType = action.payload;
+    case GET_BOILERTYPES_REJECTED:
+      return {
+        ...state,
+        isLoading: false,
+        error: true,
+      };
+    case ADD_BOILERTYPE_FETCHING:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case ADD_BOILERTYPE_FULFILLED:
+      return {
+        ...state,
+        isLoading: false,
+        list: [...state.list, action.payload],
+      };
+    case ADD_BOILERTYPE_REJECTED:
+      return {
+        ...state,
+        isLoading: false,
+        error: true,
+      };
+    case DELETE_BOILERTYPE_FETCHING:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case DELETE_BOILERTYPE_FULFILLED:
+      return {
+        ...state,
+        isLoading: false,
+        list: state.list.filter((boilerType) => boilerType._id !== action.payload),
+      };
+    case DELETE_BOILERTYPE_REJECTED:
+      return {
+        ...state,
+        isLoading: false,
+        error: true,
+      };
+    case UPDATE_BOILERTYPE_FETCHING:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case UPDATE_BOILERTYPE_FULFILLED:
+      return {
+        ...state,
+        isLoading: false,
+        list: [...state.list.map((boilerType) => {
+          if (boilerType._id === action.payload._id) {
+            return action.payload;
           }
           return boilerType;
-        }),
-      ];
-    }
-    default: {
-      return state;
-    }
+        })],
+      };
+    case UPDATE_BOILERTYPE_REJECTED:
+      return {
+        ...state,
+        isLoading: false,
+        error: true,
+      };
+    default:
+      return { ...state };
   }
 };
-
-export default boilerTypeReducer;
+export default boilerTypesReducer;

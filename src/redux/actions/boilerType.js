@@ -1,42 +1,128 @@
+/* eslint-disable no-param-reassign, no-underscore-dangle */
 import {
-  FETCH_BOILERTYPE_REQUEST, FETCH_BOILER_TYPE, ADD_BOILER_TYPE,
-  DELETE_BOILER_TYPE, UPDATE_BOILER_TYPE,
+  GET_BOILERTYPES_FETCHING,
+  GET_BOILERTYPES_FULFILLED,
+  GET_BOILERTYPES_REJECTED,
+  ADD_BOILERTYPE_FETCHING,
+  ADD_BOILERTYPE_FULFILLED,
+  ADD_BOILERTYPE_REJECTED,
+  DELETE_BOILERTYPE_FETCHING,
+  DELETE_BOILERTYPE_FULFILLED,
+  DELETE_BOILERTYPE_REJECTED,
+  UPDATE_BOILERTYPE_FETCHING,
+  UPDATE_BOILERTYPE_FULFILLED,
+  UPDATE_BOILERTYPE_REJECTED,
 } from '../types/boilerType';
 
-export const fetchBoilerTypeRequest = () => ({
-  type: FETCH_BOILERTYPE_REQUEST,
+const URL = 'https://rr-caldar-t3.herokuapp.com/api/boilersType';
+
+const getBoilerTypesFetching = () => ({
+  type: GET_BOILERTYPES_FETCHING,
 });
 
-export const onFetchBoilerTypeSucced = (boilerType) => ({
-  type: FETCH_BOILER_TYPE,
-  payload: boilerType,
+const getBoilerTypesFulfilled = (list) => ({
+  type: GET_BOILERTYPES_FULFILLED,
+  payload: list,
 });
 
-export const fetchBoilerType = () => async (dispatch) => {
-  dispatch(fetchBoilerTypeRequest());
-  try {
-    const response = await fetch('https://run.mocky.io/v3/ce765be3-7457-43f7-9ae8-cc58e6c5f21a');
-    const data = await response.json();
-    dispatch(onFetchBoilerTypeSucced(data));
-  } catch (e) {
-    console.log(e);
-  }
+const getBoilerTypesRejected = () => ({
+  type: GET_BOILERTYPES_REJECTED,
+});
+
+export const getBoilerTypes = () => (dispatch) => {
+  dispatch(getBoilerTypesFetching());
+  return fetch(URL)
+    .then((data) => data.json())
+    .then((response) => {
+      dispatch(getBoilerTypesFulfilled(response));
+    })
+    .catch(() => {
+      dispatch(getBoilerTypesRejected());
+    });
 };
 
-export const addBoilerType = (item) => ({
-  type: ADD_BOILER_TYPE,
-  payload: {
-    id: Math.floor(Math.random() * 10000),
-    ...item,
-  },
+const addBoilerTypeFetching = () => ({
+  type: ADD_BOILERTYPE_FETCHING,
 });
 
-export const deleteBoilerType = (number) => ({
-  type: DELETE_BOILER_TYPE,
-  payload: number,
+const addBoilerTypeFulfilled = (content) => ({
+  type: ADD_BOILERTYPE_FULFILLED,
+  payload: content,
 });
 
-export const updateBoilerType = (item) => ({
-  type: UPDATE_BOILER_TYPE,
-  payload: item,
+const addBoilerTypeRejected = () => ({
+  type: ADD_BOILERTYPE_REJECTED,
 });
+
+export const addBoilerType = (building) => (dispatch) => {
+  dispatch(addBoilerTypeFetching());
+  return fetch(URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(building),
+  }).then((data) => data.json())
+    .then((response) => {
+      dispatch(addBoilerTypeFulfilled(response));
+    })
+    .catch(() => {
+      dispatch(addBoilerTypeRejected());
+    });
+};
+
+const deleteBoilerTypeFetching = () => ({
+  type: DELETE_BOILERTYPE_FETCHING,
+});
+
+const deleteBoilerTypeFulfilled = (payload) => ({
+  type: DELETE_BOILERTYPE_FULFILLED,
+  payload,
+});
+
+const deleteBoilerTypeRejected = () => ({
+  type: DELETE_BOILERTYPE_REJECTED,
+});
+
+export const deleteBoilerType = (_id) => (dispatch) => {
+  dispatch(deleteBoilerTypeFetching());
+  return fetch(`${URL}/${_id}`, { method: 'DELETE' })
+    .then((data) => data.json())
+    .then(() => {
+      dispatch(deleteBoilerTypeFulfilled(_id));
+    })
+    .catch(() => {
+      dispatch(deleteBoilerTypeRejected());
+    });
+};
+
+const updateBoilerTypeFetching = () => ({
+  type: UPDATE_BOILERTYPE_FETCHING,
+});
+
+const updateBoilerTypeFulfilled = (content) => ({
+  type: UPDATE_BOILERTYPE_FULFILLED,
+  payload: content,
+});
+
+const updateBoilerTypeRejected = (error) => ({
+  type: UPDATE_BOILERTYPE_REJECTED,
+  payload: error,
+});
+
+export const updateBoilerType = (content) => (dispatch) => {
+  dispatch(updateBoilerTypeFetching());
+  return fetch(`´${URL}/${content._id}`, {
+    method: 'PUT',
+    body: JSON.stringify(content),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then((data) => data.json())
+    .then((json) => {
+      dispatch(updateBoilerTypeFulfilled(json));
+    })
+    .catch(() => {
+      dispatch(updateBoilerTypeRejected());
+    });
+};
