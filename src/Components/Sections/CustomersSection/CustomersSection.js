@@ -105,7 +105,6 @@ submitHanlder: function on submit
             if (!values.email) {
               errors.username = 'Required';
             }
-
             if (!values.address) {
               errors.confirm = 'Required';
             }
