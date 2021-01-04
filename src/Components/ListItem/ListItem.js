@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 import './list-item.css';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { useDispatch } from 'react-redux';
 import TransitionModal from '../TransitionModal/TransitionModal';
+import { deleteCustomer, updateCustomerFetch } from '../../redux/actions/customer';
+
+const itemActions = {
+  deleteCustomer,
+  updateCustomerFetch,
+};
 
 const ListItem = (props) => {
   // Every module has differents keys, this function set the states according to each case.
@@ -15,6 +22,7 @@ const ListItem = (props) => {
   };
   const [updateForm, setUpdateForm] = useState(getInitialState());
   const [shouldOpenModal, setShouldOpenModal] = useState(false);
+  const dispatch = useDispatch();
 
   const handleInputChange = (event) => {
     setUpdateForm({
@@ -35,17 +43,17 @@ const ListItem = (props) => {
 
   const handleUpdateSubmit = (event) => {
     event.preventDefault();
-    props.handleUpdate(getNewItem());
+    dispatch(itemActions[props.updateAction](getNewItem()));
     setShouldOpenModal(false);
   };
 
   return (<tr className="list-item-row">
           {Object.entries(props.item)
             .filter(([key]) => !props.notToShowKeys.includes(key))
-            .map((entry) => <td key={entry[1] + props.item.id}>{entry[1]}</td>)
+            .map((entry) => <td key={entry[1] + props.item._id}>{entry[1]}</td>)
           }
           <td>
-              <DeleteIcon onClick={() => props.removeFromListCallback(props.item.id)}/>
+              <DeleteIcon onClick={() => dispatch(itemActions[props.deleteAction](props.id))}/>
               <EditIcon onClick={handleOpen}/>
           </td>
           <TransitionModal
