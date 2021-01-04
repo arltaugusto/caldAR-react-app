@@ -36,7 +36,7 @@ const BuildingsItem = (props) => {
     return (
       <ul>
         <input
-          type='number'
+          type='text'
           name='id'
           value={buildingsItem.id}
           onChange={onChange}

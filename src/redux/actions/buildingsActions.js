@@ -15,8 +15,6 @@ import {
 
 const URL = 'https://rr-caldar-t3.herokuapp.com/api/buildings';
 
-console.log(URL);
-
 const getBuildingsFetching = () => ({
   type: GET_BUILDINGS_FETCHING,
 });
@@ -113,8 +111,8 @@ const updateBuildingRejected = (error) => ({
 
 export const updateBuilding = (content) => (dispatch) => {
   dispatch(updateBuildingFetching());
-  return fetch(`´${URL}/${content._id}`, {
-    method: 'PUT',
+  return fetch(`${URL}/${content._id}`, {
+    method: 'put',
     body: JSON.stringify(content),
     headers: {
       'Content-Type': 'application/json',
