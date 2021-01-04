@@ -14,7 +14,7 @@ import {
   UPDATE_BOILERTYPE_REJECTED,
 } from '../types/boilerType';
 
-const URL = 'https://rr-caldar-t3.herokuapp.com/api/boilersType';
+const URL = 'https://rr-caldar-t3-1.herokuapp.com/api/boilersType';
 
 const getBoilerTypesFetching = () => ({
   type: GET_BOILERTYPES_FETCHING,
@@ -112,7 +112,7 @@ const updateBoilerTypeRejected = (error) => ({
 
 export const updateBoilerType = (content) => (dispatch) => {
   dispatch(updateBoilerTypeFetching());
-  return fetch(`´${URL}/${content._id}`, {
+  return fetch(`${URL}/${content._id}`, {
     method: 'PUT',
     body: JSON.stringify(content),
     headers: {
