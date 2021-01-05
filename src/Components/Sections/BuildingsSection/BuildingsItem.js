@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FaPen, FaTrash } from 'react-icons/fa';
 import { updateBuilding } from '../../../redux/actions/buildingsActions';
-import './CustomersItems.css';
+import './styles/CustomersItems.css';
 
 const BuildingsItem = (props) => {
   const [buildingsItem, setBuildingsItem] = useState({

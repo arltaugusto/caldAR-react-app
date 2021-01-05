@@ -61,9 +61,8 @@ const BuildingsSection = (props) => {
     });
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    props.addBuilding(buildingForm);
+  const onSubmit = (values) => {
+    props.addBuilding(values);
     const newBuilding = {
       // id: uuid(),
       address: buildingForm.address,
