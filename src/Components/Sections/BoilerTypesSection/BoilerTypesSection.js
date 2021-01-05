@@ -50,9 +50,8 @@ const BoilerTypesSection = (props) => {
     });
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    props.addBoilerType(boilerTypeForm);
+  const onSubmit = (values) => {
+    props.addBoilerType(values);
     const newBoilerType = {
       description: boilerTypeForm.description,
       stock: boilerTypeForm.stock,
