@@ -11,6 +11,7 @@ import {
   addBuilding,
   updateBuilding,
 } from '../../../redux/actions/buildingsActions';
+import ModalRedux from '../../Modals/Modal.jsx';
 
 const BuildingsSection = (props) => {
   const dispatch = useDispatch();
@@ -108,11 +109,13 @@ const BuildingsSection = (props) => {
           updateBuilding={props.updateBuilding}
         />
       ))}
-      <AddBuilding
-      onChange={onChange}
-      onSubmit={onSubmit}
-      buildingForm={buildingForm}
-      />
+      <ModalRedux>
+        <AddBuilding
+        onChange={onChange}
+        onSubmit={onSubmit}
+        buildingForm={buildingForm}
+        />
+      </ModalRedux>
     </div>
   );
 };
