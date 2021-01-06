@@ -8,18 +8,25 @@ const ContentTable = (props) => (
                 <thead className={tableStyles.tableTitles}>
                     <tr>
                         {props.columns.map((column) => <th key={column}>{column}</th>)}
-                        <th>Actions</th>)
+                        <th>Actions</th>
                     </tr>
                 </thead>
-                {
-                    props.items.map((value) => <ListItem
-                            key={value.id}
-                            id={value.id}
-                            item={value}
-                    />)
-                }
+                <tbody>
+                    {
+                        props.items.map((value) => <ListItem
+                                key={value._id}
+                                id={value._id}
+                                item={value}
+                                notToShowKeys={props.notToShowKeys}
+                                getForm={props.getForm}
+                                updateAction={props.updateAction}
+                                updateTitle={props.updateTitle}
+                                deleteAction={props.removeAction}
+                        />)
+                    }
+                </tbody>
             </table>
         </div>
-
 );
+
 export default ContentTable;

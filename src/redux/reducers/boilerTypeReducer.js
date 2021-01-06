@@ -42,13 +42,14 @@ const boilerTypesReducer = (state = initialState, action) => {
     case ADD_BOILERTYPE_FETCHING:
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
       };
     case ADD_BOILERTYPE_FULFILLED:
       return {
         ...state,
         isLoading: false,
         list: [...state.list, action.payload],
+        error: false,
       };
     case ADD_BOILERTYPE_REJECTED:
       return {
