@@ -54,14 +54,14 @@ const addBoilerTypeRejected = () => ({
   type: ADD_BOILERTYPE_REJECTED,
 });
 
-export const addBoilerType = (building) => (dispatch) => {
+export const addBoilerType = (boilerType) => (dispatch) => {
   dispatch(addBoilerTypeFetching());
   return fetch(URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(building),
+    body: JSON.stringify(boilerType),
   }).then((data) => data.json())
     .then((response) => {
       dispatch(addBoilerTypeFulfilled(response));

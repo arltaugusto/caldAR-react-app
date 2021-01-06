@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign, no-underscore-dangle */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { bindActionCreators } from 'redux';
 import { useDispatch, connect } from 'react-redux';
 import updateTitle from '../../../redux/actions/index';
-import AddBoilerType from './AddBoilerType';
 import BoilerTypeItem from './BoilerTypeItem';
 import {
   getBoilerTypes,
@@ -11,15 +11,10 @@ import {
   addBoilerType,
   updateBoilerType,
 } from '../../../redux/actions/boilerType';
+import { showModal, closeModal } from '../../../redux/actions/modalAction';
 
 const BoilerTypesSection = (props) => {
   const dispatch = useDispatch();
-  const [allBoilerTypes, setAllBoilerTypes] = useState(props.boilerTypes.list);
-  const [boilerTypeForm, setboilerTypeForm] = useState({
-    id: '',
-    description: '',
-    stock: '',
-  });
 
   useEffect(() => {
     dispatch(updateTitle('BoilerTypes'));
@@ -37,37 +32,7 @@ const BoilerTypesSection = (props) => {
     return <div>ERROR!!!</div>;
   }
 
-  const addBoilerTypeForm = () => {
-    const newBoilerType = {
-      description: boilerTypeForm.description,
-      stock: boilerTypeForm.stock,
-    };
-    setAllBoilerTypes([...allBoilerTypes, newBoilerType]);
-    setboilerTypeForm({
-      id: '',
-      description: '',
-      stock: '',
-    });
-  };
-
-  const onSubmit = (values) => {
-    props.addBoilerType(values);
-    const newBoilerType = {
-      description: boilerTypeForm.description,
-      stock: boilerTypeForm.stock,
-    };
-    addBoilerTypeForm(newBoilerType);
-    setboilerTypeForm({
-      id: '',
-      description: '',
-      stock: '',
-    });
-  };
-
-  const onChange = (e) => setboilerTypeForm({
-    ...boilerTypeForm,
-    [e.target.name]: e.target.value,
-  });
+  const handleOpen = () => props.showModal('addBoilerType', {});
 
   return (
     <div>
@@ -81,17 +46,15 @@ const BoilerTypesSection = (props) => {
         <BoilerTypeItem
           key={boilerType._id}
           boilerType={boilerType}
-          allBoilerTypes={allBoilerTypes}
           deleteBoilerType={props.deleteBoilerType}
           getBoilerTypes={props.getBoilerTypes}
           updateBoilerType={props.updateBoilerType}
         />
       ))}
-      <AddBoilerType
-      onChange={onChange}
-      onSubmit={onSubmit}
-      boilerTypeForm={boilerTypeForm}
-      />
+      <div onClick={handleOpen}>
+        <AddCircleIcon style={ { color: '#8325FE', width: 60, height: 60 }}/>
+      </div>
+
     </div>
   );
 };
@@ -101,6 +64,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   deleteBoilerType,
   getBoilerTypes,
   updateBoilerType,
+  showModal,
+  closeModal,
 }, dispatch);
 
 const mapStateToProps = (state) => ({

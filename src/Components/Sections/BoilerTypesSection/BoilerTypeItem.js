@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FaPen, FaTrash } from 'react-icons/fa';
 import { updateBoilerType } from '../../../redux/actions/boilerType';
+import { showModal } from '../../../redux/actions/modalAction';
 import './BoilerType.css';
 
 const BoilerTypeItem = (props) => {
@@ -64,7 +65,10 @@ const BoilerTypeItem = (props) => {
       <li className="liStyle">{props.boilerType.stock}</li>
       <div className="liStyle">
           <button onClick={toggleEdit} className="actionButtons"><FaPen size={20}/></button>
-          <button onClick={() => props.deleteBoilerType(props.boilerType._id)} className="actionButtons"><FaTrash size={20}/></button>
+          <button onClick={() => props.showModal('deleteConfirmation',
+            { id: props.boilerType._id, record: 'Boiler Type', deleteAction: 'deleteBoilerType' })}
+            className="actionButtons"><FaTrash size={20}/>
+          </button>
       </div>
     </ul>
   );
@@ -72,6 +76,7 @@ const BoilerTypeItem = (props) => {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   updateBoilerType,
+  showModal,
 }, dispatch);
 
 const mapStateToProps = (state) => ({
