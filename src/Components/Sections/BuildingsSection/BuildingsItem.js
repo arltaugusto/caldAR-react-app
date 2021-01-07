@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FaPen, FaTrash } from 'react-icons/fa';
 import { updateBuilding } from '../../../redux/actions/buildingsActions';
+import { showModal } from '../../../redux/actions/modalAction';
 import './styles/CustomersItems.css';
 
 const BuildingsItem = (props) => {
@@ -81,7 +82,7 @@ const BuildingsItem = (props) => {
 
   return (
     <ul className="ulStyle">
-      <li className="liStyle">{props.building._id}</li>
+      {/* <li className="liStyle">{props.building._id}</li> */}
       <li className="liStyle">{props.building.address}</li>
       <li className="liStyle">{props.building.name}</li>
       <li className="liStyle">{props.building.phone}</li>
@@ -89,7 +90,8 @@ const BuildingsItem = (props) => {
       <li className="liStyle">{props.building.boilers}</li>
       <div className="liStyle">
           <button onClick={toggleEdit} className="actionButtons"><FaPen size={20}/></button>
-          <button onClick={() => props.deleteBuilding(props.building._id)} className="actionButtons"><FaTrash size={20}/></button>
+          <button onClick={() => props.showModal('deleteConfirmation',
+            { id: props.building._id, record: 'Building', deleteAction: 'deleteBuilding' })} className="actionButtons"><FaTrash size={20}/></button>
       </div>
     </ul>
   );
@@ -97,6 +99,7 @@ const BuildingsItem = (props) => {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   updateBuilding,
+  showModal,
 }, dispatch);
 
 const mapStateToProps = (state) => ({
