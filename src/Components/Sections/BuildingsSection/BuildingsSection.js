@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
-import { v4 as uuid } from 'uuid';
 import { useDispatch, connect } from 'react-redux';
-import AddBuilding from './AddBuilding';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import BuildingsItem from './BuildingsItem';
 import updateTitle from '../../../redux/actions/index';
 import {
@@ -11,19 +10,10 @@ import {
   addBuilding,
   updateBuilding,
 } from '../../../redux/actions/buildingsActions';
-import ModalRedux from '../../Modals/Modal.jsx';
+import { showModal, closeModal } from '../../../redux/actions/modalAction';
 
 const BuildingsSection = (props) => {
   const dispatch = useDispatch();
-  const [allBuildings, setAllBuildings] = useState(props.buildings.list);
-  const [buildingForm, setBuildingForm] = useState({
-    id: '',
-    address: '',
-    name: '',
-    phone: '',
-    idCustomer: '',
-    boilers: [],
-  });
 
   useEffect(() => {
     dispatch(updateTitle('Buildings'));
@@ -41,57 +31,12 @@ const BuildingsSection = (props) => {
     return <div>ERROR!!!</div>;
   }
 
-  // Add Building
-  const addBuildingForm = () => {
-    const newBuilding = {
-      id: uuid(),
-      address: buildingForm.address,
-      name: buildingForm.name,
-      phone: buildingForm.phone,
-      idCustomer: buildingForm.idCustomer,
-      boilers: buildingForm.boilers,
-    };
-    setAllBuildings([...allBuildings, newBuilding]);
-    setBuildingForm({
-      id: '',
-      address: '',
-      name: '',
-      phone: '',
-      idCustomer: '',
-      boilers: [],
-    });
-  };
-
-  const onSubmit = (values) => {
-    props.addBuilding(values);
-    const newBuilding = {
-      // id: uuid(),
-      address: buildingForm.address,
-      name: buildingForm.name,
-      phone: buildingForm.phone,
-      idCustomer: buildingForm.idCustomer,
-      boilers: buildingForm.boilers,
-    };
-    addBuildingForm(newBuilding);
-    setBuildingForm({
-      id: '',
-      address: '',
-      name: '',
-      phone: '',
-      idCustomer: '',
-      boilers: [],
-    });
-  };
-
-  const onChange = (e) => setBuildingForm({
-    ...buildingForm,
-    [e.target.name]: e.target.value,
-  });
+  const handleOpen = () => props.showModal('addBuildings', {});
 
   return (
     <div>
       <ul className="ulStyle">
-        <li className="liStyle">Id</li>
+        {/* <li className="liStyle">Id</li> */}
         <li className="liStyle">Address</li>
         <li className="liStyle">Name</li>
         <li className="liStyle">Phone</li>
@@ -103,19 +48,19 @@ const BuildingsSection = (props) => {
         <BuildingsItem
           key={building._id}
           building={building}
-          allBuildings={allBuildings}
           deleteBuilding={props.deleteBuilding}
           getBuildings={props.getBuildings}
           updateBuilding={props.updateBuilding}
         />
       ))}
-      <ModalRedux>
-        <AddBuilding
-        onChange={onChange}
-        onSubmit={onSubmit}
-        buildingForm={buildingForm}
-        />
-      </ModalRedux>
+        <div onClick={handleOpen}>
+        <AddCircleIcon style={ {
+          color: '#8325FE',
+          width: 60,
+          height: 60,
+          cursor: 'pointer',
+        }}/>
+      </div>
     </div>
   );
 };
@@ -125,6 +70,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   deleteBuilding,
   getBuildings,
   updateBuilding,
+  showModal,
+  closeModal,
 }, dispatch);
 
 const mapStateToProps = (state) => ({

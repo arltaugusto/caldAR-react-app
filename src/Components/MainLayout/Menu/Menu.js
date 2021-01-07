@@ -46,7 +46,6 @@ const Menu = () => {
                         isSelected={selected === item.id}
                         handleSelect={handleMenuItemClick}
                     />)
-
                     }
                 </div>
             </aside>

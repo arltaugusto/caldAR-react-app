@@ -1,11 +1,11 @@
 import {
   SHOW_MODAL,
   CLOSE_MODAL,
-} from '../types/modalsTypes';
+} from '../types/modalTypes';
 
 const initialState = {
   show: false,
-  modalType: null,
+  modalForm: 'addBuildings',
   meta: {},
 };
 
@@ -15,14 +15,11 @@ const modalsReducer = (state = initialState, action) => {
       return {
         ...state,
         show: true,
-        modalType: action.modalType,
+        modalForm: action.modalForm,
         meta: action.meta,
       };
     case CLOSE_MODAL:
-      return {
-        ...state,
-        show: false,
-      };
+      return initialState;
     default:
       return state;
   }
