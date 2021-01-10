@@ -1,3 +1,4 @@
+/* eslint import/no-cycle: [2, { maxDepth: 1 }] */
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
