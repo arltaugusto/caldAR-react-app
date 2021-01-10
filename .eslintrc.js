@@ -20,6 +20,9 @@ module.exports = {
     ],
     "rules": {
         "react/prop-types": 0,
-        "import/no-named-as-default": 0
+        "react/jsx-filename-extension": [1, { extensions: ['.js', '.jsx'] }],
+        "react/display-name": 0,
+        "import/no-named-as-default": 0,
+        'no-underscore-dangle': 0
     }
 };

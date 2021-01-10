@@ -7,14 +7,14 @@ import BoilersSection from './Components/Sections/BoilersSection/BoilersSection'
 import BoilerTypesSection from './Components/Sections/BoilerTypesSection/BoilerTypesSection';
 import CustomersSection from './Components/Sections/CustomersSection/CustomersSection';
 
-const Routes = (props) => (
+const Routes = () => (
         <Switch>
-            <Route path="/technicians" component={() => <TechniciansSection setHeaderTitle={props.setHeaderCallback}/>} />
-            <Route path="/boilers" component={() => <BoilersSection setHeaderTitle={props.setHeaderCallback}/>} />
-            <Route path="/boilerTypes" component={() => <BoilerTypesSection setHeaderTitle={props.setHeaderCallback}/>} />
-            <Route path="/buildings" component={() => <BuildingsSection setHeaderTitle={props.setHeaderCallback}/>} />
-            <Route path="/customers" component={() => <CustomersSection setHeaderTitle={props.setHeaderCallback}/>} />
-            <Route path="/appointments" component={() => <AppointmentsSection setHeaderTitle={props.setHeaderCallback}/>} />
+            <Route path="/technicians" component={TechniciansSection} />
+            <Route path="/boilers" component={BoilersSection} />
+            <Route path="/boilerTypes" component={BoilerTypesSection} />
+            <Route path="/buildings" component={BuildingsSection} />
+            <Route path="/customers" component={CustomersSection} />
+            <Route path="/appointments" component={AppointmentsSection} />
         </Switch>
 );
 
