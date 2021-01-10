@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import headerReducer from './header';
-import customersReducer from './customersReducer';
+import boilerTypesReducer from './boilerTypeReducer';
+import modalReducer from './modalReducer';
 
 const allReducers = combineReducers({
   headerReducer,
-  customersReducer,
+  boilerTypesReducer,
+  modalReducer,
 });
 
 export default allReducers;
