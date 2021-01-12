@@ -88,25 +88,15 @@
     justify-content: space-around;
     padding-bottom: 5px;
     list-style:none;
-    border-bottom: 1px solid #e3e2e4;
-    margin: 10px;
+    border-bottom: 1px solid #e3e2e4
 }
 
 .liStyle {
     width: 16%;
     text-align: center;
-    margin: 10 px;
-    padding: 5px;
 }
 .liStyle-tit {
     width: 16%;
     text-align: center;
     color: #8325FE;
-    margin: 10px;
-}
-input{
-    margin: 5px;
-}
-.div-buttons{
-    display: inline;
 }

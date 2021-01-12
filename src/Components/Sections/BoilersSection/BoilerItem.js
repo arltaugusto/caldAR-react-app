@@ -7,58 +7,58 @@ import { showModal } from '../../../redux/actions/modalAction';
 import './boilers-section.css';
 
 const BoilerItem = (props) => {
-  const [boilersItem, setboilersItem] = useState({
-    ...props.boiler,
+  const [boilerItem, setboilersItem] = useState({
+    ...props.boilerIt,
     isEditing: false,
   });
 
   const toggleEdit = () => {
     setboilersItem({
-      ...boilersItem,
-      isEditing: !boilersItem.isEditing,
+      ...boilerItem,
+      isEditing: !boilerItem.isEditing,
     });
   };
 
   const onChange = (e) => {
     setboilersItem({
-      ...boilersItem,
+      ...boilerItem,
       [e.target.name]: e.target.value,
     });
   };
 
   const saveChanges = () => {
     toggleEdit();
-    props.updateBoiler(boilersItem);
+    props.updateBoiler(boilerItem);
   };
 
-  if (boilersItem.isEditing) {
+  if (boilerItem.isEditing) {
     return (
       <ul className="ulStyle">
         <li className='liStyle'
-          value={boilersItem.id}>
+          value={boilerItem.id}>
         </li>
         <input className='liStyle'
           type='text'
           name='typeId'
-          value={boilersItem.typeId}
+          value={boilerItem.typeId}
           onChange={onChange}
         />
         <input className='liStyle'
           type='text'
           name='maintainanceRate'
-          value={boilersItem.maintainanceRate}
+          value={boilerItem.maintainanceRate}
           onChange={onChange}
         />
         <input className='liStyle'
           type='number'
           name='hourEventualCost'
-          value={boilersItem.hourEventualCost}
+          value={boilerItem.hourEventualCost}
           onChange={onChange}
         />
         <input className='liStyle'
           type='text'
           name='idBuilding'
-          value={boilersItem.idBuilding}
+          value={boilerItem.idBuilding}
           onChange={onChange}
         />
         <div>
@@ -79,7 +79,7 @@ const BoilerItem = (props) => {
       <div className="liStyle">
           <button onClick={toggleEdit} className="actionButtons"><FaPen size={20}/></button>
           <button onClick={() => props.showModal('deleteConfirmation',
-            { id: props.boilerIt._id, record: 'Boilers ', deleteAction: 'deleteBoiler' })}
+            { id: props.boilerIt._id, record: 'Boiler ', deleteAction: 'deleteBoiler' })}
             className="actionButtons"><FaTrash size={20}/>
           </button>
       </div>

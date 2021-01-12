@@ -23,10 +23,10 @@ const AddBoilers = (props) => {
           <form onSubmit={handleSubmit}>
             <div>
               <Field
-              name='type'
+              name='typeId'
               component={TextInput}
-              placeholder='Type'
-              label="Type: "
+              placeholder='Type Id'
+              label="Type Id: "
               validate={required}
               />
             </div>
