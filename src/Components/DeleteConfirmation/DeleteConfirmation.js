@@ -1,10 +1,12 @@
 /* eslint-disable no-param-reassign, no-underscore-dangle */
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { closeModal } from '../../redux/actions/modalAction';
+import { deleteBoilerType } from '../../redux/actions/boilerType';
 import { deleteBuilding } from '../../redux/actions/buildingsActions';
+import { closeModal } from '../../redux/actions/modalAction';
 
 const deleteActions = {
+  deleteBoilerType,
   deleteBuilding,
 };
 

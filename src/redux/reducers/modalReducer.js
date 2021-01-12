@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   show: false,
-  modalForm: 'addBuildings',
+  modalForm: 'addBoilerType',
   meta: {},
 };
 

@@ -1,11 +1,16 @@
+/* eslint import/no-cycle: [2, { maxDepth: 1 }] */
 import React from 'react';
 import './styles.css';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { Form, Field } from 'react-final-form';
+import { loginWithFirebase } from '../../redux/actions/authActions';
 
 const LogIn = ({
   login,
 }) => {
   const onSubmitLogin = (values) => {
+    console.log(values);
     login(values);
   };
 
@@ -25,7 +30,7 @@ const LogIn = ({
             <Field
               className="input"
               component='input'
-              type='text'
+              type='email'
               name='email'
               placeholder='example@email.com'
             />
@@ -39,11 +44,17 @@ const LogIn = ({
               component='input'
             />
           </div>
-          <button type='submit' value='login' disabled={submitting || pristine}>Log in</button>
+          <button type='submit' value='Log in' disabled={submitting || pristine}>Log in</button>
       </form>
     )}
   />
   );
 };
 
-export default LogIn;
+const mapDispatchToProps = (dispatch) => {
+  bindActionCreators({
+    login: loginWithFirebase,
+  }, dispatch);
+};
+
+export default connect(null, mapDispatchToProps)(LogIn);

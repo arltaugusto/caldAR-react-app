@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { setAuthentication } from '../../redux/actions/authActions';
 import { tokenListener } from '../Firebase/index';
 import Routes from '../../routes';
@@ -13,14 +13,14 @@ import LogIn from '../LogSection/LogIn';
 
 const MainLayout = ({
   authenticated,
-  setAuthentication,
+  setAuthenticationFirebase,
 }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      setAuthentication();
+      setAuthenticationFirebase();
     }
-  }, [setAuthentication]);
+  }, [setAuthenticationFirebase]);
 
   useEffect(() => {
     tokenListener();
@@ -42,20 +42,17 @@ const MainLayout = ({
   return (
     <Switch>
       <Route path='/login' exact component={LogIn} />
+      <Redirect path='/' to='/login' />
     </Switch>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    authenticated: state.auth.authenticated,
-  };
-};
+const mapStateToProps = (state) => ({
+  authenticated: state.authReducer.authenticated,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    setAuthentication,
-  }, dispatch);
-};
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  setAuthentication,
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainLayout);

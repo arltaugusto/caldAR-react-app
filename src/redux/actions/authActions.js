@@ -1,3 +1,4 @@
+/* eslint import/no-cycle: [2, { maxDepth: 1 }] */
 import {
   LOGIN_FETCHING,
   LOGIN_FULFILLED,
@@ -9,60 +10,44 @@ import {
 } from '../types/logTypes';
 import Firebase from '../../Components/Firebase';
 
-const loginFetchin = () => {
-  return {
-    type: LOGIN_FETCHING,
-  };
-};
+const loginFetching = () => ({
+  type: LOGIN_FETCHING,
+});
 
-const loginFulfilled = () => {
-  return {
-    type: LOGIN_FULFILLED,
-  };
-};
+const loginFulfilled = () => ({
+  type: LOGIN_FULFILLED,
+});
 
-const logingRejected = () => {
-  return {
-    type: LOGIN_REJECTED,
-  };
-};
+const logingRejected = () => ({
+  type: LOGIN_REJECTED,
+});
 
 export const loginWithFirebase = (credentials) => (dispatch) => {
-  dispatch(loginFetchin());
+  dispatch(loginFetching());
   return Firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password)
     .then(async (response) => {
       const token = await response.user.getIdToken();
       localStorage.setItem('token', token);
       return dispatch(loginFulfilled());
     })
-    .catch(() => {
-      return dispatch(logingRejected());
-    });
+    .catch(() => dispatch(logingRejected()));
 };
 
-export const setAuthentication = () => {
-  return {
-    type: SET_AUTHENTICATION,
-  };
-};
+export const setAuthentication = () => ({
+  type: SET_AUTHENTICATION,
+});
 
-const logoutFetching = () => {
-  return {
-    type: LOGOUT_FETCHING,
-  };
-};
+const logoutFetching = () => ({
+  type: LOGOUT_FETCHING,
+});
 
-const logoutFulfilled = () => {
-  return {
-    type: LOGOUT_FULFILLED,
-  };
-};
+const logoutFulfilled = () => ({
+  type: LOGOUT_FULFILLED,
+});
 
-const logoutRejected = () => {
-  return {
-    type: LOGOUT_REJECTED,
-  };
-};
+const logoutRejected = () => ({
+  type: LOGOUT_REJECTED,
+});
 
 export const logout = () => (dispatch) => {
   dispatch(logoutFetching());
@@ -71,7 +56,5 @@ export const logout = () => (dispatch) => {
       localStorage.removeItem('token');
       return dispatch(logoutFulfilled());
     })
-    .catch(() => {
-      return dispatch(logoutRejected());
-    });
+    .catch(() => dispatch(logoutRejected()));
 };

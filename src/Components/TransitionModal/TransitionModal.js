@@ -7,6 +7,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { closeModal } from '../../redux/actions/modalAction';
 import AddBuildings from '../Sections/BuildingsSection/AddBuilding';
+import AddBoilerType from '../Sections/BoilerTypesSection/AddBoilerType';
 import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import './modal.css';
 
@@ -24,12 +25,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const formsObject = {
-  // eslint-disable-next-line react/display-name
-  addBuildings: () => <AddBuildings />,
-  // eslint-disable-next-line react/display-name
+  addBoilerType: () => <AddBoilerType />,
+  addBuildings: () => < AddBuildings />,
   deleteConfirmation: (meta) => <DeleteConfirmation id={meta.id}
-      record={meta.record}
-      deleteAction={meta.deleteAction}
+    record={meta.record}
+    deleteAction={meta.deleteAction}
     />,
 };
 
@@ -39,23 +39,23 @@ export default function TransitionsModal() {
   const modalState = useSelector((state) => state.modalReducer);
   const dispatch = useDispatch();
   return (
-    <Modal
-      aria-labelledby="transition-modal-title"
-      aria-describedby="transition-modal-description"
-      className={classes.modal}
-      open={modalState.show}
-      onClose={() => dispatch(closeModal())}
-      closeAfterTransition
-      BackdropComponent={Backdrop}
-      BackdropProps={{
-        timeout: 500,
-      }}
-    >
-      <Fade in={modalState.show}>
-        <div className={`${classes.paper} modal`}>
-          {formsObject[modalState.modalForm](modalState.meta)}
-        </div>
-      </Fade>
-    </Modal>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={modalState.show}
+          onClose={() => dispatch(closeModal())}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={modalState.show}>
+            <div className={`${classes.paper} modal`}>
+              {formsObject[modalState.modalForm](modalState.meta)}
+            </div>
+          </Fade>
+        </Modal>
   );
 }
