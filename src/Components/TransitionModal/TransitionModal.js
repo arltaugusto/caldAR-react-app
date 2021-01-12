@@ -7,6 +7,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { closeModal } from '../../redux/actions/modalAction';
 import AddBoilerType from '../Sections/BoilerTypesSection/AddBoilerType';
+import AddBoiler from '../Sections/BoilersSection/AddBoiler';
 import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import './modal.css';
 
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const formsObject = {
   addBoilerType: () => <AddBoilerType />,
+  addBoiler: () => <AddBoiler />,
   deleteConfirmation: (meta) => <DeleteConfirmation id={meta.id}
       record={meta.record}
       deleteAction={meta.deleteAction}

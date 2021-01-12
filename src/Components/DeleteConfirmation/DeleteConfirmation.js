@@ -2,10 +2,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteBoilerType } from '../../redux/actions/boilerType';
+import { deleteBoiler } from '../../redux/actions/boiler';
 import { closeModal } from '../../redux/actions/modalAction';
 
 const deleteActions = {
   deleteBoilerType,
+  deleteBoiler,
 };
 
 const deleteConfirmation = (props) => {

@@ -1,0 +1,112 @@
+.editing-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 85%;
+    margin: 0;
+}
+
+.technicians-table-container {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.technicians-table-container table {
+    width: 100%;
+    border-spacing: 0
+}
+
+.technicians-table-container table tr th {
+    border-bottom: 1px solid #707070;
+}
+
+.table-titles th {
+    width: 25%;
+    color: #8325FE;
+    font-size: 27px;
+    font-weight: normal;
+}
+
+.shadow {
+    -moz-box-shadow:    0px 0px 5px 5px #ccc;
+    -webkit-box-shadow: 0px 0px 5px 5px #ccc;
+    box-shadow:         0px 0px 5px 5px #ccc;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%
+    
+}
+
+.add-tenchnician-form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit-button {
+    background-color: #8325FE;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 15px;
+    border: none;
+    margin: 3px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.single-row {
+    width: 85%;
+    padding: 20px;
+}
+
+.add-button-container {
+    width: 75%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 40px;
+}
+.actionButtons {
+    cursor: pointer;
+    margin: 10px;
+    color: #242e3e;
+    border: none;
+    background: white;
+}
+
+.ulStyle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 5px;
+    list-style:none;
+    border-bottom: 1px solid #e3e2e4;
+    margin: 10px;
+}
+
+.liStyle {
+    width: 16%;
+    text-align: center;
+    margin: 10 px;
+    padding: 5px;
+}
+.liStyle-tit {
+    width: 16%;
+    text-align: center;
+    color: #8325FE;
+    margin: 10px;
+}
+input{
+    margin: 5px;
+}
+.div-buttons{
+    display: inline;
+}
