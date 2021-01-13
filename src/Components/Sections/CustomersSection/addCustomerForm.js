@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import { Form, Field } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import FormSelect from '../../TransitionModal/Select/Select';
-import { addCustomer } from '../../../redux/actions/customer';
+import { addCustomer, updateCustomerFetch } from '../../../redux/actions/customer';
 import { closeModal } from '../../../redux/actions/modalAction';
 
 const customerTypes = [
@@ -11,9 +11,8 @@ const customerTypes = [
   { value: 'particular', label: 'Particular' },
 ];
 
-const addCustomerForm = () => {
+const addCustomerForm = (props) => {
   const dispatch = useDispatch();
-
   const validateForm = (values) => {
     const errors = {};
     if (!values.email) {
@@ -25,27 +24,34 @@ const addCustomerForm = () => {
     return errors;
   };
 
-  const submitHandler = (values) => {
-    console.log(values);
-    const newItem = {
+  const getNewItem = (values) => (
+    {
       type: values.customerType,
       email: values.email,
       address: values.address,
-    };
-    dispatch(addCustomer(newItem));
+    }
+  );
+
+  const handleUpdateSubmit = (values) => {
+    dispatch(updateCustomerFetch({ ...getNewItem(values), _id: props.updateForm._id }));
+    dispatch(closeModal());
+  };
+
+  const submitHandler = (values) => {
+    dispatch(addCustomer(getNewItem(values)));
     dispatch(closeModal());
   };
 
   return (
         <Form
-          onSubmit={submitHandler}
+          onSubmit={props.updateAction ? handleUpdateSubmit : submitHandler}
           validate={validateForm}
           render={({
             handleSubmit,
           }) => (
             <form onSubmit={handleSubmit}>
               <div className="row">
-                <Field name="email">
+                <Field name="email" initialValue={props.updateAction ? props.updateForm.email : ''}>
                   {({ input }) => (
                       <TextField
                         name={input.name}
@@ -57,7 +63,7 @@ const addCustomerForm = () => {
                       />
                   )}
                 </Field>
-                <Field name="customerType" initialValue="business">
+                <Field name="customerType" initialValue={props.updateAction ? props.updateForm.type : 'business'}>
                   {({ input, meta }) => (
                     <div>
                       <FormSelect
@@ -70,7 +76,7 @@ const addCustomerForm = () => {
                   )}
                 </Field>
               </div>
-              <Field name="address">
+              <Field name="address" initialValue={props.updateAction ? props.updateForm.address : ''}>
                 {({ input }) => (
                     <TextField
                       name={input.name}

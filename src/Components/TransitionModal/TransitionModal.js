@@ -30,7 +30,10 @@ const formsObject = {
       record={meta.record}
       deleteAction={meta.deleteAction}
     />,
-  addCustomer: () => <AddCustomerForm />,
+  addCustomer: (meta) => <AddCustomerForm
+    updateAction={meta.updateAction}
+    updateForm={meta.updateForm}
+  />,
 };
 
 // FIXME use arrow function
