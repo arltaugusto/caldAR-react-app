@@ -8,6 +8,7 @@ import Fade from '@material-ui/core/Fade';
 import { closeModal } from '../../redux/actions/modalAction';
 import AddBoilerType from '../Sections/BoilerTypesSection/AddBoilerType';
 import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
+import AddCustomerForm from '../Sections/CustomersSection/addCustomerForm';
 import './modal.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,6 +30,7 @@ const formsObject = {
       record={meta.record}
       deleteAction={meta.deleteAction}
     />,
+  addCustomer: () => <AddCustomerForm />,
 };
 
 // FIXME use arrow function

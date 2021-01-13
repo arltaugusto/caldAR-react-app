@@ -23,9 +23,9 @@ const FormSelect = (props) => {
                   <InputLabel id="demo-simple-select-outlined-label">{props.selectLabel}</InputLabel>
                   <Select
                     labelId="demo-simple-select-outlined-label"
-                    value={props.initialValue}
-                    onChange={props.handleChange}
+                    value={props.input.value}
                     label={props.selectLabel}
+                    onChange={props.input.onChange}
                     name={props.name}
                   >
                     {props.options.map((option) => <MenuItem
