@@ -1,42 +1,46 @@
 import React, { useState } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { FaPen, FaTrash } from 'react-icons/fa';
+import { updateTechnician } from '../../../redux/actions/technician';
+import { showModal } from '../../../redux/actions/modalAction';
 
 const TechnicianItem = (props) => {
-  const [technicianItem, setTechnicianItem] = useState({
-    ...props.technician,
+  const [technicianIt, setTechnicianItem] = useState({
+    ...props.technicianIt,
     isEditing: false,
   });
 
   const toggleEdit = () => {
     setTechnicianItem({
-      ...technicianItem,
-      isEditing: !technicianItem.isEditing,
+      ...technicianIt,
+      isEditing: !technicianIt.isEditing,
     });
   };
 
   const onChange = (e) => {
     setTechnicianItem({
-      ...technicianItem,
+      ...technicianIt,
       [e.target.name]: e.target.value,
     });
   };
 
   const saveChanges = () => {
     toggleEdit();
-    props.updateTechnician(technicianItem);
+    props.updateTechnician(technicianIt);
   };
 
-  if (technicianItem.isEditing) {
+  if (technicianIt.isEditing) {
     return (
       <ul className="ulStyle">
         <li className='liStyle'>
-          {technicianItem.id}
+          {technicianIt._id}
         </li>
         <li className='liStyle'>
           <input
             type='text'
             name='firstName'
-            value={technicianItem.firstName}
+            value={technicianIt.firstName}
             onChange={onChange}
           />
         </li>
@@ -44,7 +48,7 @@ const TechnicianItem = (props) => {
           <input
             type='text'
             name='lastName'
-            value={technicianItem.lastName}
+            value={technicianIt.lastName}
             onChange={onChange}
           />
         </li>
@@ -52,7 +56,7 @@ const TechnicianItem = (props) => {
           <input
             type='text'
             name='email'
-            value={technicianItem.email}
+            value={technicianIt.email}
             onChange={onChange}
           />
         </li>
@@ -60,7 +64,7 @@ const TechnicianItem = (props) => {
           <input
           type='text'
             name='hourRate'
-            value={technicianItem.hourRate}
+            value={technicianIt.hourRate}
             onChange={onChange}
           />
         </li>
@@ -68,7 +72,7 @@ const TechnicianItem = (props) => {
          <input
           type='number'
           name='dailyCapacity'
-          value={props.technician.dailyCapacity}
+          value={technicianIt.dailyCapacity}
           onChange={onChange}
         />
         </li>
@@ -76,7 +80,7 @@ const TechnicianItem = (props) => {
           <input
             type='text'
             name='typeBoilersId'
-            value={technicianItem.typeBoilersId}
+            value={technicianIt.typeBoilersId}
             onChange={onChange}
           />
         </li>
@@ -90,19 +94,30 @@ const TechnicianItem = (props) => {
 
   return (
     <ul className="ulStyle">
-      <li className="liStyle">{props.technician.id}</li>
-      <li className="liStyle">{props.technician.firstName}</li>
-      <li className="liStyle">{props.technician.lastName}</li>
-      <li className="liStyle">{props.technician.email}</li>
-      <li className="liStyle">{props.technician.hourRate}</li>
-      <li className="liStyle">{props.technician.dailyCapacity}</li>
-      <li className="liStyle">{props.technician.typeBoilersId}</li>
+      <li className="liStyle">{props.technicianIt._id}</li>
+      <li className="liStyle">{props.technicianIt.firstName}</li>
+      <li className="liStyle">{props.technicianIt.lastName}</li>
+      <li className="liStyle">{props.technicianIt.email}</li>
+      <li className="liStyle">{props.technicianIt.hourRate}</li>
+      <li className="liStyle">{props.technicianIt.dailyCapacity}</li>
+      <li className="liStyle">{props.technicianIt.typeBoilersId}</li>
       <div className="liStyle">
           <button onClick={toggleEdit} className="actionButtons"><FaPen size={20}/></button>
-          <button onClick={() => props.deleteTechnician(props.technician.id)} className="actionButtons"><FaTrash size={20}/></button>
+          <button onClick={() => props.showModal('deleteConfirmation',
+            { id: props.technicianIt._id, record: 'Technician ', deleteAction: 'deleteTechnician' })}
+             className="actionButtons"><FaTrash size={20}/></button>
       </div>
     </ul>
   );
 };
 
-export default TechnicianItem;
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  updateTechnician,
+  showModal,
+}, dispatch);
+
+const mapStateToProps = (state) => ({
+  techncianIt: state.techniciansReducer,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TechnicianItem);

@@ -7,7 +7,7 @@ import TextInput from './TextInput.jsx';
 import { addBoiler } from '../../../redux/actions/boiler';
 import { closeModal } from '../../../redux/actions/modalAction';
 
-const AddBoilers = (props) => {
+const addBoilers = (props) => {
   const onSubmit = (values) => {
     props.addBoiler(values);
     props.closeModal();
@@ -59,6 +59,7 @@ const AddBoilers = (props) => {
             </div>
             <div>
               <button
+              className='submit-button'
               type='submit'
               disabled={submitting || pristine}
               >
@@ -77,4 +78,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   closeModal,
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(AddBoilers);
+export default connect(null, mapDispatchToProps)(addBoilers);

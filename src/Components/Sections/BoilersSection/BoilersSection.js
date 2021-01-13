@@ -23,7 +23,7 @@ const BoilersSection = (props) => {
     props.getBoilers();
   }, [props.getBoilers]);
 
-  if (props.boilers.isloading) {
+  if (props.boilers.isLoading) {
     return <div>Loading...</div>;
   }
 
@@ -43,7 +43,6 @@ const BoilersSection = (props) => {
         <li className="liStyle-tit">Id Building</li>
         <li className="liStyle-tit">Actions</li>
       </ul>
-      {console.log(props.boilers.list)}
       {props.boilers.list.map((boilerIt) => (
         <BoilerItem
           key={boilerIt._id}

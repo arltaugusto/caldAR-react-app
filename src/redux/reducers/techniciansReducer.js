@@ -1,17 +1,17 @@
 import {
-  GET_BOILERS_FETCHING,
-  GET_BOILERS_FULFILLED,
-  GET_BOILERS_REJECTED,
-  ADD_BOILER_FETCHING,
-  ADD_BOILER_FULFILLED,
-  ADD_BOILER_REJECTED,
-  DELETE_BOILER_FETCHING,
-  DELETE_BOILER_FULFILLED,
-  DELETE_BOILER_REJECTED,
-  UPDATE_BOILER_FETCHING,
-  UPDATE_BOILER_FULFILLED,
-  UPDATE_BOILER_REJECTED,
-} from '../types/boilers';
+  GET_TECHNICIANS_FETCHING,
+  GET_TECHNICIANS_FULFILLED,
+  GET_TECHNICIANS_REJECTED,
+  ADD_TECHNICIAN_FETCHING,
+  ADD_TECHNICIAN_FULFILLED,
+  ADD_TECHNICIAN_REJECTED,
+  DELETE_TECHNICIAN_FETCHING,
+  DELETE_TECHNICIAN_FULFILLED,
+  DELETE_TECHNICIAN_REJECTED,
+  UPDATE_TECHNICIAN_FETCHING,
+  UPDATE_TECHNICIAN_FULFILLED,
+  UPDATE_TECHNICIAN_REJECTED,
+} from '../types/technicians';
 
 const initialState = {
   isLoading: false,
@@ -19,77 +19,77 @@ const initialState = {
   error: false,
 };
 
-const boilersReducer = (state = initialState, action) => {
+const techniciansReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_BOILERS_FETCHING:
+    case GET_TECHNICIANS_FETCHING:
       return {
         ...state,
         isLoading: true,
       };
-    case GET_BOILERS_FULFILLED:
+    case GET_TECHNICIANS_FULFILLED:
       return {
         ...state,
         isLoading: false,
         list: action.payload,
       };
-    case GET_BOILERS_REJECTED:
+    case GET_TECHNICIANS_REJECTED:
       return {
         ...state,
         isLoading: false,
         error: true,
       };
-    case ADD_BOILER_FETCHING:
+    case ADD_TECHNICIAN_FETCHING:
       return {
         ...state,
         isLoading: false,
       };
-    case ADD_BOILER_FULFILLED:
+    case ADD_TECHNICIAN_FULFILLED:
       return {
         ...state,
         isLoading: false,
         list: [...state.list, action.payload],
         error: false,
       };
-    case ADD_BOILER_REJECTED:
+    case ADD_TECHNICIAN_REJECTED:
       return {
         ...state,
         isLoading: false,
         error: true,
       };
-    case DELETE_BOILER_FETCHING:
+    case DELETE_TECHNICIAN_FETCHING:
       return {
         ...state,
         isLoading: true,
       };
-    case DELETE_BOILER_FULFILLED:
+    case DELETE_TECHNICIAN_FULFILLED:
       return {
         ...state,
         isLoading: false,
-        list: state.list.filter((boiler) => boiler._id !== action.payload),
+        list: state.list.filter((technician) => technician._id !== action.payload),
       };
-    case DELETE_BOILER_REJECTED:
+    case DELETE_TECHNICIAN_REJECTED:
       return {
         ...state,
         isLoading: false,
         error: true,
       };
-    case UPDATE_BOILER_FETCHING:
+    case UPDATE_TECHNICIAN_FETCHING:
       return {
         ...state,
         isLoading: true,
       };
-    case UPDATE_BOILER_FULFILLED:
+    case UPDATE_TECHNICIAN_FULFILLED:
       return {
         ...state,
         isLoading: false,
-        list: [...state.list.map((boilerIt) => {
-          if (boilerIt._id === action.payload._id) {
+        list: [...state.list.map((technicianIt) => {
+          if (technicianIt._id === action.payload._id) {
             return action.payload;
           }
-          return boilerIt;
+          return technicianIt;
         })],
       };
-    case UPDATE_BOILER_REJECTED:
+    case UPDATE_TECHNICIAN_REJECTED:
       return {
         ...state,
         isLoading: false,
@@ -99,4 +99,4 @@ const boilersReducer = (state = initialState, action) => {
       return { ...state };
   }
 };
-export default boilersReducer;
+export default techniciansReducer;

@@ -7,58 +7,58 @@ import { showModal } from '../../../redux/actions/modalAction';
 import './boilers-section.css';
 
 const BoilerItem = (props) => {
-  const [boilerItem, setboilersItem] = useState({
+  const [boilerIt, setboilerItem] = useState({
     ...props.boilerIt,
     isEditing: false,
   });
 
   const toggleEdit = () => {
-    setboilersItem({
-      ...boilerItem,
-      isEditing: !boilerItem.isEditing,
+    setboilerItem({
+      ...boilerIt,
+      isEditing: !boilerIt.isEditing,
     });
   };
 
   const onChange = (e) => {
-    setboilersItem({
-      ...boilerItem,
+    setboilerItem({
+      ...boilerIt,
       [e.target.name]: e.target.value,
     });
   };
 
   const saveChanges = () => {
     toggleEdit();
-    props.updateBoiler(boilerItem);
+    props.updateBoiler(boilerIt);
   };
 
-  if (boilerItem.isEditing) {
+  if (boilerIt.isEditing) {
     return (
       <ul className="ulStyle">
         <li className='liStyle'
-          value={boilerItem.id}>
+          value={boilerIt._id}>
         </li>
         <input className='liStyle'
           type='text'
           name='typeId'
-          value={boilerItem.typeId}
+          value={boilerIt.typeId}
           onChange={onChange}
         />
         <input className='liStyle'
           type='text'
           name='maintainanceRate'
-          value={boilerItem.maintainanceRate}
+          value={boilerIt.maintainanceRate}
           onChange={onChange}
         />
         <input className='liStyle'
           type='number'
           name='hourEventualCost'
-          value={boilerItem.hourEventualCost}
+          value={boilerIt.hourEventualCost}
           onChange={onChange}
         />
         <input className='liStyle'
           type='text'
           name='idBuilding'
-          value={boilerItem.idBuilding}
+          value={boilerIt.idBuilding}
           onChange={onChange}
         />
         <div>
@@ -93,7 +93,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 }, dispatch);
 
 const mapStateToProps = (state) => ({
-  boiler: state.boilersReducer,
+  boilerItem: state.boilersReducer,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoilerItem);

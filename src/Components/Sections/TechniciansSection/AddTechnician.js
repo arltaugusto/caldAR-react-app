@@ -1,55 +1,88 @@
 import React from 'react';
+import { Form, Field } from 'react-final-form';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import required from './validations';
+import TextInput from './TextInput.jsx';
+import { addTechnician } from '../../../redux/actions/technician';
+import { closeModal } from '../../../redux/actions/modalAction';
 
-const addTechnician = (props) => (
-        <form onSubmit={props.onSubmit}>
-          <input
-            type='text'
+const addTechnicians = (props) => {
+  const onSubmit = (values) => {
+    props.addTechnician(values);
+    props.closeModal();
+  };
+  return (
+    <div>
+       <Form
+        onSubmit={onSubmit}
+        render={({
+          handleSubmit, form, submitting, pristine,
+        }) => (
+        <form onSubmit={handleSubmit}>
+          <div>
+          <Field
+            label='First Name: '
             name='firstName'
+            component={TextInput}
             placeholder='First Name'
-            value={props.firstName}
-            onChange={props.onChange}
+            validate={required}
           />
-          <input
-            type='text'
+          <Field
+            label='Last Name: '
             name='lastName'
+            component={TextInput}
             placeholder='Last Name'
-            value={props.lastName}
-            onChange={props.onChange}
+            validate={required}
            />
-          <input
-            type='text'
+          <Field
+            label='Email: '
             name='email'
+            component={TextInput}
             placeholder='Email'
-            value={props.email}
-            onChange={props.onChange}
+            validate={required}
            />
-          <input
-            type='text'
+          <Field
+            label='Hour Rate: '
             name='hourRate'
+            component={TextInput}
             placeholder='Hour Rate'
-            value={props.hourRate}
-            onChange={props.onChange}
+            validate={required}
           />
-          <input
-            type='number'
+          <Field
+            label='Daily Capacity: '
             name='dailyCapacity'
+            component={TextInput}
             placeholder='Daily Capacity'
-            value={props.dailyCapacity}
-            onChange={props.onChange}
+            validate={required}
           />
-          <input
-            type='text'
+          <Field
+            label='Type Boilers: '
             name='typeBoilersId'
+            component={TextInput}
             placeholder='Type Boilers'
-            value={props.typeBoilersId}
-            onChange={props.onChange}
+            validate={required}
           />
-          <input
+        </div>
+        <div>
+          <button
             type='submit'
             className='submit-button'
-            value='Add Technician'
-          />
+            disabled={submitting || pristine}
+          >
+            Add Technician
+          </button>
+        </div>
         </form>
-);
+        )}
+        />
+        </div>
+  );
+};
 
-export default addTechnician;
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  addTechnician,
+  closeModal,
+}, dispatch);
+
+export default connect(null, mapDispatchToProps)(addTechnicians);
