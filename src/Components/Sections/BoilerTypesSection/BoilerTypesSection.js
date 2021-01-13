@@ -1,84 +1,75 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+/* eslint-disable no-param-reassign, no-underscore-dangle */
+import React, { useEffect } from 'react';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { bindActionCreators } from 'redux';
+import { useDispatch, connect } from 'react-redux';
 import updateTitle from '../../../redux/actions/index';
-import BoilerTypes from '../../../data/BoilerTypesMOCK.json';
 import BoilerTypeItem from './BoilerTypeItem';
-import AddBoilerType from './AddBoilerType';
-import './BoilerType.css';
+import {
+  getBoilerTypes,
+  deleteBoilerType,
+  addBoilerType,
+  updateBoilerType,
+} from '../../../redux/actions/boilerType';
+import { showModal, closeModal } from '../../../redux/actions/modalAction';
 
-const BoilerTypesSection = () => {
+const BoilerTypesSection = (props) => {
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(updateTitle('Boiler Types'));
+    dispatch(updateTitle('BoilerTypes'));
   }, []);
 
-  const [boilerTypeForm, setBoilerTypeForm] = useState({
-    id: '',
-    description: '',
-    stock: '',
-  });
+  useEffect(() => {
+    props.getBoilerTypes();
+  }, [props.getBoilerTypes]);
 
-  const [allBoilerTypes, setAllBoilerTypes] = useState(BoilerTypes);
+  if (props.boilerTypes.isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  const addBoilerType = () => {
-    const newBoilerType = {
-      id: Math.floor(Math.random() * 10000),
-      description: boilerTypeForm.description,
-      stock: boilerTypeForm.stock,
-    };
-    setAllBoilerTypes([...allBoilerTypes, newBoilerType]);
-    setBoilerTypeForm({
-      id: '',
-      description: '',
-      stock: '',
-    });
-  };
+  if (props.boilerTypes.error) {
+    return <div>ERROR!!!</div>;
+  }
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    addBoilerType();
-  };
-
-  const onChange = (e) => setBoilerTypeForm({
-    ...boilerTypeForm,
-    [e.target.name]: e.target.value,
-  });
-
-  const deleteBoilersTypes = (id) => {
-    setAllBoilerTypes([...allBoilerTypes.filter((boilerType) => boilerType.id !== id)]);
-  };
-
-  const updateBoilersTypes = (updatedItem) => {
-    const itemCopy = [...allBoilerTypes];
-    const updatedBoilerTypes = itemCopy.map((item) => (item.id === updatedItem.id
-      ? updatedItem : item));
-    setAllBoilerTypes(updatedBoilerTypes);
-  };
+  const handleOpen = () => props.showModal('addBoilerType', {});
 
   return (
     <div>
-            <ul className="ulStyle">
-              <li className="liStyle">Id</li>
-              <li className="liStyle">Description</li>
-              <li className="liStyle">Stock</li>
-              <li className="liStyle">Actions</li>
-            </ul>
-            {allBoilerTypes.map((boilerType) => (
-            <BoilerTypeItem
-              key={boilerType.id}
-              boilerType={boilerType}
-              deleteBoilersTypes={deleteBoilersTypes}
-              updateBoilersTypes={updateBoilersTypes}
-            />
-            ))}
-      <AddBoilerType
-        boilerTypeForm={boilerTypeForm}
-        onSubmit={onSubmit}
-        onChange={onChange}
-        addBoilerType={addBoilerType}
-      />
+      <ul className="ulStyle">
+        <li className="liStyle">Id</li>
+        <li className="liStyle">Description</li>
+        <li className="liStyle">Stock</li>
+        <li className="liStyle">Actions</li>
+      </ul>
+      {props.boilerTypes.list.map((boilerType) => (
+        <BoilerTypeItem
+          key={boilerType._id}
+          boilerType={boilerType}
+          deleteBoilerType={props.deleteBoilerType}
+          getBoilerTypes={props.getBoilerTypes}
+          updateBoilerType={props.updateBoilerType}
+        />
+      ))}
+      <div onClick={handleOpen}>
+        <AddCircleIcon style={ { color: '#8325FE', width: 60, height: 60 }}/>
+      </div>
+
     </div>
   );
 };
 
-export default BoilerTypesSection;
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  addBoilerType,
+  deleteBoilerType,
+  getBoilerTypes,
+  updateBoilerType,
+  showModal,
+  closeModal,
+}, dispatch);
+
+const mapStateToProps = (state) => ({
+  boilerTypes: state.boilerTypesReducer,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BoilerTypesSection);

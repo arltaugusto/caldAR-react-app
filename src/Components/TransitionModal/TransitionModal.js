@@ -1,8 +1,13 @@
+/* eslint-disable no-param-reassign, no-underscore-dangle */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
+import { useDispatch, useSelector } from 'react-redux';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import { closeModal } from '../../redux/actions/modalAction';
+import AddBoilerType from '../Sections/BoilerTypesSection/AddBoilerType';
+import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import './modal.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -18,33 +23,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const formsObject = {
+  addBoilerType: () => <AddBoilerType />,
+  deleteConfirmation: (meta) => <DeleteConfirmation id={meta.id}
+      record={meta.record}
+      deleteAction={meta.deleteAction}
+    />,
+};
+
 // FIXME use arrow function
-export default function TransitionsModal(props) {
+export default function TransitionsModal() {
   const classes = useStyles();
-
-  const handleClose = () => {
-    props.setModal(false);
-  };
-
+  const modalState = useSelector((state) => state.modalReducer);
+  const dispatch = useDispatch();
   return (
         <Modal
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"
           className={classes.modal}
-          open={props.open}
-          onClose={handleClose}
+          open={modalState.show}
+          onClose={() => dispatch(closeModal())}
           closeAfterTransition
           BackdropComponent={Backdrop}
           BackdropProps={{
             timeout: 500,
           }}
         >
-          <Fade in={props.open}>
+          <Fade in={modalState.show}>
             <div className={`${classes.paper} modal`}>
-                <div className="modal-title">
-                    <h2>{props.title}</h2>
-                </div>
-                {props.children}
+              {formsObject[modalState.modalForm](modalState.meta)}
             </div>
           </Fade>
         </Modal>
